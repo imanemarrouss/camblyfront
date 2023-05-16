@@ -1,0 +1,278 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'sessionCoursTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'sessionCoursTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="1">{{'sessionCoursReference' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'sessionCoursReference' | translate}}" id="1" [(ngModel)]="item.reference"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validSessionCoursReference}"  />
+                                            <small class='p-error' *ngIf='!validSessionCoursReference'>Reference est obligatoire.</small>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="2">{{'sessionCoursProf' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="profs" [(ngModel)]="item.prof" id="2"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="ref" placeholder="{{'sessionCoursProf' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="3">{{'sessionCoursCours' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="courss" [(ngModel)]="item.cours" id="3"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'sessionCoursCours' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="4">{{'sessionCoursGroupeEtudiant' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="groupeEtudiants" [(ngModel)]="item.groupeEtudiant" id="4"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="id" placeholder="{{'sessionCoursGroupeEtudiant' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="5">{{'sessionCoursDuree' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="5"
+                                                           placeholder="{{'sessionCoursDuree' | translate}}" [(ngModel)]="item.duree"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="6">{{'sessionCoursTotalheure' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="6"
+                                                           placeholder="{{'sessionCoursTotalheure' | translate}}" [(ngModel)]="item.totalheure"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="7">{{'sessionCoursMois' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="7"
+                                                           placeholder="{{'sessionCoursMois' | translate}}" [(ngModel)]="item.mois"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="8">{{'sessionCoursAnnee' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="8"
+                                                           placeholder="{{'sessionCoursAnnee' | translate}}" [(ngModel)]="item.annee"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="9">{{'sessionCoursDateFin' | translate}}</label>
+                                            <p-calendar appendTo="body" id="9"   [showTime]="true" [showSeconds]="false" placeholder="{{'sessionCoursDateFin' | translate}}"  [(ngModel)]="item.dateFin"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="10">{{'sessionCoursDateDebut' | translate}}</label>
+                                            <p-calendar appendTo="body" id="10"   [showTime]="true" [showSeconds]="false" placeholder="{{'sessionCoursDateDebut' | translate}}"  [(ngModel)]="item.dateDebut"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field align-inputswitch col-12  md:col-3">
+                                            <div  class="label-inputswitch">
+                                                <label for="11">{{'sessionCoursPayer' | translate}}</label>
+                                            </div>
+                                            <div class="input-switch">
+                                                <p-inputSwitch   appendTo="body" id="11"  [(ngModel)]="item.payer"
+                                                         >
+                                                </p-inputSwitch>
+                                                
+                                            </div>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="12">{{'sessionCoursSalary' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="salarys" [(ngModel)]="item.salary" id="12"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="code" placeholder="{{'sessionCoursSalary' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                        </div>
+                    </p-tabPanel>
+
+                            <p-tabPanel header="{{'Sections' | translate}}">
+                                <p-tabView [(activeIndex)]="activeTab">
+                                    <p-tabPanel header="Création">
+                                        <div class="grid">
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="1">Code<span style="color: red;">*</span></label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Code"
+                                                                       id="1" [(ngModel)]="sectionsElement.code"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validSectionsCode}"  >
+                                                                <small class='p-error' *ngIf='!validSectionsCode'>Code est obligatoire.</small>
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="2">Libelle</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Libelle"
+                                                                       id="2" [(ngModel)]="sectionsElement.libelle"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="3">Url image</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Url image"
+                                                                       id="3" [(ngModel)]="sectionsElement.urlImage"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="4">Url image2</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Url image2"
+                                                                       id="4" [(ngModel)]="sectionsElement.urlImage2"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="5">Url image3</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Url image3"
+                                                                       id="5" [(ngModel)]="sectionsElement.urlImage3"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="6">Url video</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Url video"
+                                                                       id="6" [(ngModel)]="sectionsElement.urlVideo"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="7">Contenu</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Contenu"
+                                                                       id="7" [(ngModel)]="sectionsElement.contenu"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="8">Questions</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Questions"
+                                                                       id="8" [(ngModel)]="sectionsElement.questions"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="9">Indication prof</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Indication prof"
+                                                                       id="9" [(ngModel)]="sectionsElement.indicationProf"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="10">Numero order</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="numeroOrder" [(ngModel)]="sectionsElement.numeroOrder" placeholder="Numero order"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Categorie section</label>
+                                                                <p-dropdown appendTo="body" [options]="categorieSections" [(ngModel)]="sectionsElement.categorieSection"
+                                                                        id="11"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="code" placeholder="Categorie section"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Cours</label>
+                                                                <p-dropdown appendTo="body" [options]="courss" [(ngModel)]="sectionsElement.cours"
+                                                                        id="12"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="libelle" placeholder="Cours"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="13">Url</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="url" [(ngModel)]="sectionsElement.url" placeholder="Url"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="14">Content</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="content" [(ngModel)]="sectionsElement.content" placeholder="Content"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                <div class="field col-12 md:col-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addSections()"></button>
+                                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste {{item.sections?.length > 0 ? '(' + item.sections?.length + ')' : ''}}">
+                                            <div class="card">
+                                                <p-table [value]="item.sections" [scrollable]="true" scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Code</th>
+                                                                        <th>Libelle</th>
+                                                                        <th>Url image</th>
+                                                                        <th>Url image2</th>
+                                                                        <th>Url image3</th>
+                                                                        <th>Url video</th>
+                                                                        <th>Contenu</th>
+                                                                        <th>Questions</th>
+                                                                        <th>Indication prof</th>
+                                                                        <th>Numero order</th>
+                                                                        <th>Categorie section</th>
+                                                                        <th>Cours</th>
+                                                                        <th>Url</th>
+                                                                        <th>Content</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                        <td>{{p.code}}</td>
+                                                                        <td>{{p.libelle}}</td>
+                                                                        <td>{{p.urlImage}}</td>
+                                                                        <td>{{p.urlImage2}}</td>
+                                                                        <td>{{p.urlImage3}}</td>
+                                                                        <td>{{p.urlVideo}}</td>
+                                                                        <td>{{p.contenu}}</td>
+                                                                        <td>{{p.questions}}</td>
+                                                                        <td>{{p.indicationProf}}</td>
+                                                                        <td>{{p.numeroOrder}}</td>
+                                                                    <td>{{p.categorieSection?.code}}</td>
+                                                                    <td>{{p.cours?.libelle}}</td>
+                                                                        <td>{{p.url}}</td>
+                                                                        <td>{{p.content}}</td>
+                                                            <td>
+                                                                <button (click)="deleteSection(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                <button (click)="editSection(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

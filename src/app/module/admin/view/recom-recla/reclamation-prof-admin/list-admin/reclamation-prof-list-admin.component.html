@@ -1,0 +1,281 @@
+<div class="grid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('ReclamationProf')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="1" type="text"  [(ngModel)]="criteria.referenceLike">
+                            <label for="1">{{'Reference' | translate}}</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateReclamationFrom"
+                                    id="2-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="2-1">{{'Date reclamation' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateReclamationTo"
+                                    id="2-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="2-2">{{'Date reclamation' | translate}} Max</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="3" type="text"  [(ngModel)]="criteria.messageLike">
+                            <label for="3">{{'Message' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown  id="4" [options]="yesOrNoTraite" [(ngModel)]="criteria.traite"
+                                    [filter]="false" [showClear]="true"  placeholder="{{'Traite' | translate}}" optionLabel="label" optionValue="value">
+                            </p-dropdown>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateTraitementFrom"
+                                    id="5-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="5-1">{{'Date traitement' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateTraitementTo"
+                                    id="5-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="5-2">{{'Date traitement' | translate}} Max</label>
+                        </span>
+
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateReponseFrom"
+                                    id="6-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="6-1">{{'Date reponse' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateReponseTo"
+                                    id="6-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="6-2">{{'Date reponse' | translate}} Max</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown  id="7" [options]="yesOrNoPostView" [(ngModel)]="criteria.postView"
+                                    [filter]="false" [showClear]="true"  placeholder="{{'Post view' | translate}}" optionLabel="label" optionValue="value">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="8" type="text"  [(ngModel)]="criteria.commentaireTraiteurLike">
+                            <label for="8">{{'Commentaire traiteur' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="9" type="text"  [(ngModel)]="criteria.objetReclamationProfLike">
+                            <label for="9">{{'Objet reclamation prof' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="admins" [(ngModel)]="criteria.admin" id="10" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Admin' | translate}}" optionLabel="id">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="profs" [(ngModel)]="criteria.prof" id="11" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Prof' | translate}}" optionLabel="ref">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="typeReclamationProfs" [(ngModel)]="criteria.typeReclamationProf" id="12" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Type reclamation prof' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['reference', 'dateReclamation', 'traite', 'dateTraitement', 'dateReponse', 'postView', 'objetReclamationProf', 'adminid', 'profref', 'typeReclamationProflibelle']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'Les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'reclamationProfHeader' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                        <th pSortableColumn="reference">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Reference' | translate}}</span>
+                                <p-sortIcon field="reference"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.reference" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="dateReclamation">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Date reclamation' | translate}}</span>
+                                <p-sortIcon field="dateReclamation"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="traite">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Traite' | translate}}</span>
+                                <p-sortIcon field="traite"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="dateTraitement">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Date traitement' | translate}}</span>
+                                <p-sortIcon field="dateTraitement"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="dateReponse">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Date reponse' | translate}}</span>
+                                <p-sortIcon field="dateReponse"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="postView">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Post view' | translate}}</span>
+                                <p-sortIcon field="postView"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="objetReclamationProf">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Objet reclamation prof' | translate}}</span>
+                                <p-sortIcon field="objetReclamationProf"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.objetReclamationProf" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="admin">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Admin' | translate}}</span>
+                                <p-sortIcon field="admin"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="prof">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Prof' | translate}}</span>
+                                <p-sortIcon field="prof"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                <!-- 
+                        <th pSortableColumn="typeReclamationProf">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Type reclamation prof' | translate}}</span>
+                                <p-sortIcon field="typeReclamationProf"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                        <td>{{element.reference}}</td>
+                            
+                            
+                        <td>{{element.dateReclamation | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td><i *ngIf="element.traite" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!element.traite" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+                            
+                            
+                        <td>{{element.dateTraitement | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td>{{element.dateReponse | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td><i *ngIf="element.postView" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!element.postView" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+                            
+                            
+                        <td>{{element.objetReclamationProf}}</td>
+                            
+                            
+                        <td>{{element.admin?.id}}</td>
+                            
+                            
+                        <td>{{element.prof?.ref}}</td>
+                            
+                             <!-- 
+                        <td>{{element.typeReclamationProf?.libelle}}</td>
+                             --> 
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning" (click)="duplicate(element)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'reclamation prof' : 'reclamation profs' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-reclamation-prof-create-admin></app-reclamation-prof-create-admin>
+        <app-reclamation-prof-edit-admin></app-reclamation-prof-edit-admin>
+        <app-reclamation-prof-view-admin></app-reclamation-prof-view-admin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

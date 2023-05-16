@@ -1,0 +1,215 @@
+<!--
+
+
+
+
+
+
+
+<div class="quiz-container">
+    <div class="quiz-header">
+        <p-card header="Quiz Title" class="quiz-title"></p-card>
+    </div>
+
+    <div class="quiz-body">
+        <div class="quiz-question">
+            <p-card class="question-card">
+                <div class="question-body">
+                    <div class="question-text">
+                        <p>{{ questions[currentQuestionIndex].libelle }}</p>
+                    </div>
+                    <div class="question-answer">
+                        <div [ngSwitch]="questions[currentQuestionIndex].typeDeQuestion.lib">
+                            <div *ngSwitchCase="'short_answer'">
+                                <input type="text" pInputText [(ngModel)]="questions[currentQuestionIndex].reponses" />
+                            </div>
+                            <div *ngSwitchCase="'checkbox'">
+                                <div *ngFor="let choice of questions[currentQuestionIndex].reponses; let i = index">
+                                    <label>
+                                        <input type="checkbox" [(ngModel)]="selectedAnswers[currentQuestionIndex][i]"/>
+                                        {{ choice.lib }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div *ngSwitchDefault>
+                                <p>Unsupported question type</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-card>
+
+            <div class="question-nav">
+                <button pButton type="button" label="Previous" (click)="onPreviousClick()" [disabled]="currentQuestionIndex == 0"
+                        class="question-nav-button prev-button"></button>
+                <button pButton type="button" label="Submit" (click)="submitQuiz()" [disabled]="currentQuestionIndex < questions.length -1"
+                        class="question-nav-button next-button"></button>
+                <button pButton type="button" label="Next" (click)="onNextClick()" [disabled]="currentQuestionIndex == questions.length - 1"
+                        class="question-nav-button next-button"></button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="quizSubmitted" class="quiz-score">
+        Your score: {{score}}
+    </div>
+</div>
+-->
+
+
+<!--
+
+<div class="quiz-container">
+    <div class="quiz-header">
+        <p-card header="Quiz Title" class="quiz-title"></p-card>
+    </div>
+
+    <div class="quiz-body">
+        <div class="quiz-question">
+            <p-card class="question-card">
+                <div class="question-body">
+                    <div class="question-text">
+                        <p>{{ questions[currentQuestionIndex].libelle }}</p>
+                    </div>
+                    <div class="question-answer">
+                        <div [ngSwitch]="questions[currentQuestionIndex].typeDeQuestion.lib">
+                            <div *ngSwitchCase="'short_answer'">
+                                <input type="text" pInputText [(ngModel)]="questions[currentQuestionIndex].reponses" />
+                            </div>
+                            <div *ngSwitchCase="'checkbox'">
+                                <div *ngFor="let choice of questions[currentQuestionIndex].reponses; let i = index">
+                                    <label>
+                                        <input type="checkbox" [(ngModel)]="selectedAnswers[currentQuestionIndex][i]"/>
+                                        {{ choice.lib }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div *ngSwitchDefault>
+                                <p>Unsupported question type</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-card>
+
+            <div class="question-nav">
+                <button pButton type="button" label="Previous" (click)="onPreviousClick()" [disabled]="currentQuestionIndex == 0"
+                        class="question-nav-button prev-button"></button>
+                <button pButton type="button" label="Submit" (click)="submitQuiz()" [disabled]="currentQuestionIndex < questions.length -1"
+                        class="question-nav-button next-button"></button>
+                <button pButton type="button" label="Next" (click)="onNextClick()" [disabled]="currentQuestionIndex == questions.length - 1"
+                        class="question-nav-button next-button"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="quiz-score" *ngIf="quizSubmitted">
+        <p-card>
+            <div class="score-card-body">
+                <h2>Your score:</h2>
+                <h1>{{score}}/{{maxScore}}</h1>
+            </div>
+        </p-card>
+    </div>
+</div>
+-->
+
+<div class="quiz-container">
+    <div class="quiz-header">
+        <p-card header="Quiz Title" class="quiz-title"></p-card>
+    </div>
+
+    <div class="quiz-body" *ngIf="!quizSubmitted">
+        <div class="quiz-question">
+            <p-card class="question-card">
+                <div class="question-body">
+                    <div class="question-text">
+                        <p>{{ questions[currentQuestionIndex].libelle }}</p>
+                    </div>
+                    <div class="question-answer">
+                        <div [ngSwitch]="questions[currentQuestionIndex].typeDeQuestion.lib">
+                            <div *ngSwitchCase="'short_answer'">
+                                <input type="text" pInputText [(ngModel)]="questions[currentQuestionIndex].reponses" />
+                            </div>
+                            <div *ngSwitchCase="'checkbox'">
+                                <div *ngFor="let choice of questions[currentQuestionIndex].reponses; let i = index">
+                                    <label>
+                                        <input type="checkbox" [(ngModel)]="selectedAnswers[currentQuestionIndex][i]" />
+                                        {{ choice.lib }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div *ngSwitchCase="'multiselect'">
+                                <div *ngFor="let choice of questions[currentQuestionIndex].reponses; let i = index">
+                                    <label>
+                                        <input type="radio" [(ngModel)]="selectedAnswer" [value]="choice" />
+                                        {{ choice.lib }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div *ngSwitchDefault>
+                                <p>Unsupported question type</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-card>
+
+            <div class="question-nav">
+                <button pButton type="button" label="Previous" (click)="onPreviousClick()" [disabled]="currentQuestionIndex == 0"
+                        class="question-nav-button prev-button"></button>
+                <button pButton type="button" label="Submit" (click)="submitQuizz()" [disabled]="currentQuestionIndex < questions.length -1"
+                        class="question-nav-button next-button"></button>
+                <button pButton type="button" label="Next" (click)="onNextClick()" [disabled]="currentQuestionIndex == questions.length - 1"
+                        class="question-nav-button next-button"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="quiz-score" *ngIf="quizSubmitted">
+        <p-card>
+            <div class="score-card-body">
+                <h2>Your score:</h2>
+                <h1>{{score}}/{{maxScore}}</h1>
+                <button pButton type="button" label="View Corrected Quiz" (click)="showCorrectedQuiz = true"></button>
+
+            </div>
+        </p-card>
+    </div>
+    <div class="quiz-body" *ngIf="showCorrectedQuiz">
+        <div class="quiz-question" *ngFor="let question of questions">
+            <p-card class="question-card">
+                <div class="question-body">
+                    <div class="question-text">
+                        <p>{{ question.libelle }}</p>
+                    </div>
+                    <div class="question-answer">
+                        <div [ngSwitch]="question.typeDeQuestion.lib">
+                            <div *ngSwitchCase="'short_answer'">
+                                <input type="text" pInputText [disabled]="true" [ngModel]="question.reponses[0].lib" />
+                            </div>
+                            <div *ngSwitchCase="'checkbox'">
+                                <div *ngFor="let choice of question.reponses">
+                                    <label>
+                                        <input type="checkbox" [disabled]="true" [checked]="choice.etatReponse.libelle === 'correct'" />
+                                        {{ choice.lib }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div *ngSwitchCase="'multiselect'">
+                                <div *ngFor="let choice of question.reponses">
+                                    <label>
+                                        <input type="checkbox" [disabled]="true" [checked]="choice.etatReponse.libelle === 'correct'" />
+                                        {{ choice.lib }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div *ngSwitchDefault>
+                                <p>Unsupported question type</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+    </div>
+</div>

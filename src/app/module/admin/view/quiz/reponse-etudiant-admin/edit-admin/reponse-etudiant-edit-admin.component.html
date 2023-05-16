@@ -1,0 +1,87 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'reponseEtudiantTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'reponseEtudiantTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="1">{{'reponseEtudiantRef' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'reponseEtudiantRef' | translate}}" id="1" [(ngModel)]="item.ref"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validReponseEtudiantRef}"  />
+                                            <small class='p-error' *ngIf='!validReponseEtudiantRef'>Ref est obligatoire.</small>
+                                        </div>
+
+                                    <div class="field col-11 md:col-5">
+                                            <label for="2">{{'reponseEtudiantReponse' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="reponses" [(ngModel)]="item.reponse" id="2"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="lib" placeholder="{{'reponseEtudiantReponse' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateReponse('Reponse')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="3">{{'reponseEtudiantAnswer' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'reponseEtudiantAnswer' | translate}}" id="3" [(ngModel)]="item.answer"
+                                                     />
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-5">
+                                            <label for="4">{{'reponseEtudiantQuizEtudiant' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="quizEtudiants" [(ngModel)]="item.quizEtudiant" id="4"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="ref" placeholder="{{'reponseEtudiantQuizEtudiant' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateQuizEtudiant('QuizEtudiant')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="5">{{'reponseEtudiantNote' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="5"
+                                                           placeholder="{{'reponseEtudiantNote' | translate}}" [(ngModel)]="item.note"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-5">
+                                            <label for="6">{{'reponseEtudiantQuestion' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="questions" [(ngModel)]="item.question" id="6"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'reponseEtudiantQuestion' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateQuestion('Question')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-reponse-create-admin></app-reponse-create-admin>
+                    <app-quiz-etudiant-create-admin></app-quiz-etudiant-create-admin>
+                    <app-question-create-admin></app-question-create-admin>
+
+
+    </p-dialog>

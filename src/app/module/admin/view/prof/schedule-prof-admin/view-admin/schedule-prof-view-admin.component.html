@@ -1,0 +1,64 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'scheduleProfTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="1">{{'Subject' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Subject' | translate}}" autofocus  id="1" [(ngModel)]="item.subject">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="2">{{'Start time' | translate}}</label>
+                        <p-calendar id="2" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Start time' | translate}}"  [(ngModel)]="item.startTime" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="3">{{'End time' | translate}}</label>
+                        <p-calendar id="3" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'End time' | translate}}"  [(ngModel)]="item.endTime" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="4">{{'Ref' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Ref' | translate}}" autofocus  id="4" [(ngModel)]="item.ref">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="5">{{'Groupe etudiant' | translate}}</label>
+                        <p-dropdown [options]="groupeEtudiants" [(ngModel)]="item.groupeEtudiant" id="5" [disabled]="true" optionLabel="id" placeholder="{{'Groupe etudiant' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="6">{{'Prof' | translate}}</label>
+                        <p-dropdown [options]="profs" [(ngModel)]="item.prof" id="6" [disabled]="true" optionLabel="ref" placeholder="{{'Prof' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="7">{{'Cours' | translate}}</label>
+                        <p-dropdown [options]="courss" [(ngModel)]="item.cours" id="7" [disabled]="true" optionLabel="libelle" placeholder="{{'Cours' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="8">{{'Grp name' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Grp name' | translate}}" autofocus  id="8" [(ngModel)]="item.grpName">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="9">{{'Prof name' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Prof name' | translate}}" autofocus  id="9" [(ngModel)]="item.profName">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="10">{{'Profs id' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="10" [disabled]="true" placeholder="{{'Profs id' | translate}}" [(ngModel)]="item.profsId"></p-inputNumber>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

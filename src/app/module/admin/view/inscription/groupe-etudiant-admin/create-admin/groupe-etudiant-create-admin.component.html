@@ -1,0 +1,115 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'groupeEtudiantTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'groupeEtudiantTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="1">{{'groupeEtudiantLibelle' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'groupeEtudiantLibelle' | translate}}" id="1" [(ngModel)]="item.libelle"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="2">{{'groupeEtudiantNiveau' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'groupeEtudiantNiveau' | translate}}" id="2" [(ngModel)]="item.niveau"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="3">{{'groupeEtudiantDateDebut' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="3"  [showTime]="true" [showSeconds]="false" placeholder="{{'groupeEtudiantDateDebut' | translate}}"  [(ngModel)]="item.dateDebut"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="4">{{'groupeEtudiantDateFin' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="4"  [showTime]="true" [showSeconds]="false" placeholder="{{'groupeEtudiantDateFin' | translate}}"  [(ngModel)]="item.dateFin"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="5">{{'groupeEtudiantNombrePlace' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="5" placeholder="{{'groupeEtudiantNombrePlace' | translate}}" [(ngModel)]="item.nombrePlace"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="6">{{'groupeEtudiantNombrePlacevide' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="6" placeholder="{{'groupeEtudiantNombrePlacevide' | translate}}" [(ngModel)]="item.nombrePlacevide"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="7">{{'groupeEtudiantNombrePlaceNonVide' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="7" placeholder="{{'groupeEtudiantNombrePlaceNonVide' | translate}}" [(ngModel)]="item.nombrePlaceNonVide"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                            <div class="field col-12  md:col-3">
+                                                <label>Etudiant</label>
+                                                <p-multiSelect [options]="groupeEtudiantDetails" [(ngModel)]="item.groupeEtudiantDetails" itemSize="30" [virtualScroll]="true"
+                                                                                                                          defaultLabel="Select un etudiant" optionLabel="etudiant.ref"  display="chip"></p-multiSelect>
+                                            </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="9">{{'groupeEtudiantGroupeEtude' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="groupeEtudes" [(ngModel)]="item.groupeEtude" id="9" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'groupeEtudiantGroupeEtude' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateGroupeEtude('GroupeEtude')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="10">{{'groupeEtudiantParcours' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="parcourss" [(ngModel)]="item.parcours" id="10" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'groupeEtudiantParcours' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="11">{{'groupeEtudiantProf' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="profs" [(ngModel)]="item.prof" id="11" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" ref " placeholder="{{'groupeEtudiantProf' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple label="Valider"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-groupe-etude-create-admin></app-groupe-etude-create-admin>
+
+            <app-etudiant-create-admin></app-etudiant-create-admin>
+
+    </p-dialog>

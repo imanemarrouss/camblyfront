@@ -1,0 +1,36 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'dictionaryTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Word' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Word' | translate}}" autofocus  id="1" [(ngModel)]="item.word">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Definition' | translate}}</label>
+                        <textarea id="2" pInputTextarea rows="5" cols="30" [disabled]="true" placeholder="{{'Definition' | translate}}"  [(ngModel)]="item.definition"></textarea>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'Etudiant' | translate}}</label>
+                        <p-dropdown [options]="etudiants" [(ngModel)]="item.etudiant" id="3" [disabled]="true" optionLabel="ref" placeholder="{{'Etudiant' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

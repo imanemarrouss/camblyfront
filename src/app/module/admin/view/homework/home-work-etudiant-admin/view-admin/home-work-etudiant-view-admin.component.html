@@ -1,0 +1,72 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'homeWorkEtudiantTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Etudiant' | translate}}</label>
+                        <p-dropdown [options]="etudiants" [(ngModel)]="item.etudiant" id="1" [disabled]="true" optionLabel="ref" placeholder="{{'Etudiant' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Home work' | translate}}</label>
+                        <p-dropdown [options]="homeWorks" [(ngModel)]="item.homeWork" id="2" [disabled]="true" optionLabel="libelle" placeholder="{{'Home work' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'Note' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="4" [disabled]="true" placeholder="{{'Note' | translate}}" [(ngModel)]="item.note"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'Resultat home work' | translate}}</label>
+                        <p-dropdown [options]="resultatHomeWorks" [(ngModel)]="item.resultatHomeWork" id="5" [disabled]="true" optionLabel="libelle" placeholder="{{'Resultat home work' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'Date home work' | translate}}</label>
+                        <p-calendar id="6" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date home work' | translate}}"  [(ngModel)]="item.dateHomeWork" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="{{'Reponse etudiant home works' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.reponseEtudiantHomeWorks" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Howe work q s t reponse</th>
+                                        <th>Answer</th>
+                                        <th>Home work question</th>
+                                        <th>Prof note</th>
+                                        <th>Note</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.howeWorkQSTReponse?.lib}}</td>
+                                        <td>{{p.answer}}</td>
+                                        <td>{{p.homeWorkQuestion?.libelle}}</td>
+                                        <td>{{p.profNote}}</td>
+                                        <td>{{p.note}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

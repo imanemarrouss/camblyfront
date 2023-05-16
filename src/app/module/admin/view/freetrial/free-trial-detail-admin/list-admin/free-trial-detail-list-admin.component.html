@@ -1,0 +1,235 @@
+<div class="grid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('FreeTrialDetail')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="freeTrials" [(ngModel)]="criteria.freeTrial" id="1" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Free trial' | translate}}" optionLabel="reference">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="etudiants" [(ngModel)]="criteria.etudiant" id="2" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Etudiant' | translate}}" optionLabel="ref">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown  id="3" [options]="yesOrNoPresence" [(ngModel)]="criteria.presence"
+                                    [filter]="false" [showClear]="true"  placeholder="{{'Presence' | translate}}" optionLabel="label" optionValue="value">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown  id="4" [options]="yesOrNoWhatsUpMessageSent" [(ngModel)]="criteria.whatsUpMessageSent"
+                                    [filter]="false" [showClear]="true"  placeholder="{{'Whats up message sent' | translate}}" optionLabel="label" optionValue="value">
+                            </p-dropdown>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateEnvoiwhatsUpMessageFrom"
+                                    id="5-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="5-1">{{'Date envoiwhats up message' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateEnvoiwhatsUpMessageTo"
+                                    id="5-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="5-2">{{'Date envoiwhats up message' | translate}} Max</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown  id="6" [options]="yesOrNoEmailMessageSent" [(ngModel)]="criteria.emailMessageSent"
+                                    [filter]="false" [showClear]="true"  placeholder="{{'Email message sent' | translate}}" optionLabel="label" optionValue="value">
+                            </p-dropdown>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateEnvoiEmailMessageFrom"
+                                    id="7-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="7-1">{{'Date envoi email message' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateEnvoiEmailMessageTo"
+                                    id="7-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="7-2">{{'Date envoi email message' | translate}} Max</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown  id="8" [options]="yesOrNoAbonne" [(ngModel)]="criteria.abonne"
+                                    [filter]="false" [showClear]="true"  placeholder="{{'Abonne' | translate}}" optionLabel="label" optionValue="value">
+                            </p-dropdown>
+                        </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['freeTrialreference', 'etudiantref', 'presence', 'whatsUpMessageSent', 'dateEnvoiwhatsUpMessage', 'emailMessageSent', 'dateEnvoiEmailMessage', 'abonne']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'Les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'freeTrialDetailHeader' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                        <th pSortableColumn="freeTrial">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Free trial' | translate}}</span>
+                                <p-sortIcon field="freeTrial"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="etudiant">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Etudiant' | translate}}</span>
+                                <p-sortIcon field="etudiant"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="presence">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Presence' | translate}}</span>
+                                <p-sortIcon field="presence"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="whatsUpMessageSent">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Whats up message sent' | translate}}</span>
+                                <p-sortIcon field="whatsUpMessageSent"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="dateEnvoiwhatsUpMessage">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Date envoiwhats up message' | translate}}</span>
+                                <p-sortIcon field="dateEnvoiwhatsUpMessage"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="emailMessageSent">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Email message sent' | translate}}</span>
+                                <p-sortIcon field="emailMessageSent"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="dateEnvoiEmailMessage">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Date envoi email message' | translate}}</span>
+                                <p-sortIcon field="dateEnvoiEmailMessage"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="abonne">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Abonne' | translate}}</span>
+                                <p-sortIcon field="abonne"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                        <td>{{element.freeTrial?.reference}}</td>
+                            
+                            
+                        <td>{{element.etudiant?.ref}}</td>
+                            
+                            
+                        <td><i *ngIf="element.presence" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!element.presence" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+                            
+                            
+                        <td><i *ngIf="element.whatsUpMessageSent" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!element.whatsUpMessageSent" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+                            
+                            
+                        <td>{{element.dateEnvoiwhatsUpMessage | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td><i *ngIf="element.emailMessageSent" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!element.emailMessageSent" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+                            
+                            
+                        <td>{{element.dateEnvoiEmailMessage | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td><i *ngIf="element.abonne" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!element.abonne" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+                            
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning" (click)="duplicate(element)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'free trial detail' : 'free trial details' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-free-trial-detail-create-admin></app-free-trial-detail-create-admin>
+        <app-free-trial-detail-edit-admin></app-free-trial-detail-edit-admin>
+        <app-free-trial-detail-view-admin></app-free-trial-detail-view-admin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

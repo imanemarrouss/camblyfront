@@ -1,0 +1,86 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'categorieSectionTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Code' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Code' | translate}}" autofocus  id="1" [(ngModel)]="item.code">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Libelle' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Libelle' | translate}}" autofocus  id="2" [(ngModel)]="item.libelle">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'Numero order' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="3" [disabled]="true" placeholder="{{'Numero order' | translate}}" [(ngModel)]="item.numeroOrder"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'Super categorie section' | translate}}</label>
+                        <p-dropdown [options]="superCategorieSections" [(ngModel)]="item.superCategorieSection" id="4" [disabled]="true" optionLabel="libelle" placeholder="{{'Super categorie section' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="{{'Sections' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.sections" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Libelle</th>
+                                        <th>Url image</th>
+                                        <th>Url image2</th>
+                                        <th>Url image3</th>
+                                        <th>Url video</th>
+                                        <th>Contenu</th>
+                                        <th>Questions</th>
+                                        <th>Indication prof</th>
+                                        <th>Numero order</th>
+                                        <th>Cours</th>
+                                        <th>Url</th>
+                                        <th>Content</th>
+                                        <th>Session cours</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.code}}</td>
+                                        <td>{{p.libelle}}</td>
+                                        <td>{{p.urlImage}}</td>
+                                        <td>{{p.urlImage2}}</td>
+                                        <td>{{p.urlImage3}}</td>
+                                        <td>{{p.urlVideo}}</td>
+                                        <td>{{p.contenu}}</td>
+                                        <td>{{p.questions}}</td>
+                                        <td>{{p.indicationProf}}</td>
+                                        <td>{{p.numeroOrder}}</td>
+                                        <td>{{p.cours?.libelle}}</td>
+                                        <td>{{p.url}}</td>
+                                        <td>{{p.content}}</td>
+                                        <td>{{p.sessionCours?.reference}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

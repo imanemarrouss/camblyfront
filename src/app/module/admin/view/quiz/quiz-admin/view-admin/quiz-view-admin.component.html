@@ -1,0 +1,116 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'quizTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="1">{{'Ref' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Ref' | translate}}" autofocus  id="1" [(ngModel)]="item.ref">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="2">{{'Lib' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Lib' | translate}}" autofocus  id="2" [(ngModel)]="item.lib">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="3">{{'Date debut' | translate}}</label>
+                        <p-calendar id="3" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date debut' | translate}}"  [(ngModel)]="item.dateDebut" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="4">{{'Date fin' | translate}}</label>
+                        <p-calendar id="4" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date fin' | translate}}"  [(ngModel)]="item.dateFin" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="7">{{'Section' | translate}}</label>
+                        <p-dropdown [options]="sections" [(ngModel)]="item.section" id="7" [disabled]="true" optionLabel="code" placeholder="{{'Section' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="8">{{'Numero' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="8" [disabled]="true" placeholder="{{'Numero' | translate}}" [(ngModel)]="item.numero"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="9">{{'Seuil reussite' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="9" [disabled]="true" placeholder="{{'Seuil reussite' | translate}}" [(ngModel)]="item.seuilReussite"></p-inputNumber>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="{{'Questions' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.questions" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Ref</th>
+                                        <th>Libelle</th>
+                                        <th>Url img</th>
+                                        <th>Url video</th>
+                                        <th>Numero</th>
+                                        <th>Point reponse juste</th>
+                                        <th>Point reponsefausse</th>
+                                        <th>Type de question</th>
+                                        <th>Home work</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.ref}}</td>
+                                        <td>{{p.libelle}}</td>
+                                        <td>{{p.urlImg}}</td>
+                                        <td>{{p.urlVideo}}</td>
+                                        <td>{{p.numero}}</td>
+                                        <td>{{p.pointReponseJuste}}</td>
+                                        <td>{{p.pointReponsefausse}}</td>
+                                        <td>{{p.typeDeQuestion?.lib}}</td>
+                                        <td>{{p.homeWork?.libelle}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="{{'Quiz etudiants' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.quizEtudiants" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Ref</th>
+                                        <th>Etudiant</th>
+                                        <th>Note</th>
+                                        <th>Resultat</th>
+                                        <th>Question current</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.ref}}</td>
+                                        <td>{{p.etudiant?.ref}}</td>
+                                        <td>{{p.note}}</td>
+                                        <td>{{p.resultat}}</td>
+                                        <td>{{p.questionCurrent}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

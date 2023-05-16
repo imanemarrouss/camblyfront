@@ -1,0 +1,208 @@
+<div class="grid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Price')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.priceMin" id="1-1"></p-inputNumber>
+                            <label for="1-1">{{'Price' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.priceMax" id="1-2"></p-inputNumber>
+                            <label for="1-2">{{'Price' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.oldPriceMin" id="2-1"></p-inputNumber>
+                            <label for="2-1">{{'Old price' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.oldPriceMax" id="2-2"></p-inputNumber>
+                            <label for="2-2">{{'Old price' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="3" type="text"  [(ngModel)]="criteria.libLike">
+                            <label for="3">{{'Lib' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nreCourseMin" id="4-1"></p-inputNumber>
+                            <label for="4-1">{{'Nre course' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nreCourseMax" id="4-2"></p-inputNumber>
+                            <label for="4-2">{{'Nre course' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nreHoursMin" id="5-1"></p-inputNumber>
+                            <label for="5-1">{{'Nre hours' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nreHoursMax" id="5-2"></p-inputNumber>
+                            <label for="5-2">{{'Nre hours' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nreMonthMin" id="6-1"></p-inputNumber>
+                            <label for="6-1">{{'Nre month' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nreMonthMax" id="6-2"></p-inputNumber>
+                            <label for="6-2">{{'Nre month' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown  id="7" [options]="yesOrNoForGroup" [(ngModel)]="criteria.forGroup"
+                                    [filter]="false" [showClear]="true"  placeholder="{{'For group' | translate}}" optionLabel="label" optionValue="value">
+                            </p-dropdown>
+                        </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['price', 'oldPrice', 'lib', 'nreCourse', 'nreHours', 'nreMonth', 'forGroup']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'Les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'priceHeader' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                        <th pSortableColumn="price">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Price' | translate}}</span>
+                                <p-sortIcon field="price"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="oldPrice">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Old price' | translate}}</span>
+                                <p-sortIcon field="oldPrice"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="lib">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Lib' | translate}}</span>
+                                <p-sortIcon field="lib"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.lib" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="nreCourse">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Nre course' | translate}}</span>
+                                <p-sortIcon field="nreCourse"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="nreHours">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Nre hours' | translate}}</span>
+                                <p-sortIcon field="nreHours"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="nreMonth">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Nre month' | translate}}</span>
+                                <p-sortIcon field="nreMonth"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="forGroup">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'For group' | translate}}</span>
+                                <p-sortIcon field="forGroup"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                        <td>{{element.price}}</td>
+                            
+                            
+                        <td>{{element.oldPrice}}</td>
+                            
+                            
+                        <td>{{element.lib}}</td>
+                            
+                            
+                        <td>{{element.nreCourse}}</td>
+                            
+                            
+                        <td>{{element.nreHours}}</td>
+                            
+                            
+                        <td>{{element.nreMonth}}</td>
+                            
+                            
+                        <td><i *ngIf="element.forGroup" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!element.forGroup" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+                            
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning" (click)="duplicate(element)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'price' : 'prices' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-price-create-admin></app-price-create-admin>
+        <app-price-edit-admin></app-price-edit-admin>
+        <app-price-view-admin></app-price-view-admin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

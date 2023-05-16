@@ -1,0 +1,122 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'vocabularyTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'vocabularyTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="1">{{'vocabularyRef' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'vocabularyRef' | translate}}" id="1" [(ngModel)]="item.ref"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="2">{{'vocabularyNumero' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="2" placeholder="{{'vocabularyNumero' | translate}}" [(ngModel)]="item.numero"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="3">{{'vocabularyWord' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'vocabularyWord' | translate}}" id="3" [(ngModel)]="item.word"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="4">{{'vocabularyLibelle' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'vocabularyLibelle' | translate}}" id="4" [(ngModel)]="item.libelle"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="5">{{'vocabularyResult' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'vocabularyResult' | translate}}" id="5" [(ngModel)]="item.result"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="6">{{'vocabularyExplication' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'vocabularyExplication' | translate}}" id="6" [(ngModel)]="item.explication"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="7">{{'vocabularyExemple' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'vocabularyExemple' | translate}}" id="7" [(ngModel)]="item.exemple"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="8">{{'vocabularyImage' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'vocabularyImage' | translate}}" id="8" [(ngModel)]="item.image"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-2">
+                                                <label for="9">{{'vocabularySection' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="sections" [(ngModel)]="item.section" id="9" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" code " placeholder="{{'vocabularySection' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateSection('Section')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="10">{{'vocabularyVocabularyQuiz' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="vocabularyQuizs" [(ngModel)]="item.vocabularyQuiz" id="10" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'vocabularyVocabularyQuiz' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateVocabularyQuiz('VocabularyQuiz')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple label="Valider"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-section-create-admin></app-section-create-admin>
+            <app-vocabulary-quiz-create-admin></app-vocabulary-quiz-create-admin>
+
+
+    </p-dialog>

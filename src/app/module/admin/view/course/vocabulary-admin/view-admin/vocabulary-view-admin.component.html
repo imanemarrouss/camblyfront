@@ -1,0 +1,64 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'vocabularyTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="1">{{'Ref' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Ref' | translate}}" autofocus  id="1" [(ngModel)]="item.ref">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="2">{{'Numero' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="2" [disabled]="true" placeholder="{{'Numero' | translate}}" [(ngModel)]="item.numero"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="3">{{'Word' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Word' | translate}}" autofocus  id="3" [(ngModel)]="item.word">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="4">{{'Libelle' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Libelle' | translate}}" autofocus  id="4" [(ngModel)]="item.libelle">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="5">{{'Result' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Result' | translate}}" autofocus  id="5" [(ngModel)]="item.result">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="6">{{'Explication' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Explication' | translate}}" autofocus  id="6" [(ngModel)]="item.explication">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="7">{{'Exemple' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Exemple' | translate}}" autofocus  id="7" [(ngModel)]="item.exemple">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="8">{{'Image' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Image' | translate}}" autofocus  id="8" [(ngModel)]="item.image">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="9">{{'Section' | translate}}</label>
+                        <p-dropdown [options]="sections" [(ngModel)]="item.section" id="9" [disabled]="true" optionLabel="code" placeholder="{{'Section' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="10">{{'Vocabulary quiz' | translate}}</label>
+                        <p-dropdown [options]="vocabularyQuizs" [(ngModel)]="item.vocabularyQuiz" id="10" [disabled]="true" optionLabel="libelle" placeholder="{{'Vocabulary quiz' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

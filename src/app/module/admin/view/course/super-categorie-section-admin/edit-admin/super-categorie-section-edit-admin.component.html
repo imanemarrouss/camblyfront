@@ -1,0 +1,96 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'superCategorieSectionTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'superCategorieSectionTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="1">{{'superCategorieSectionCode' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'superCategorieSectionCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validSuperCategorieSectionCode}"  />
+                                            <small class='p-error' *ngIf='!validSuperCategorieSectionCode'>Code est obligatoire.</small>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="2">{{'superCategorieSectionLibelle' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'superCategorieSectionLibelle' | translate}}" id="2" [(ngModel)]="item.libelle"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validSuperCategorieSectionLibelle}"  />
+                                            <small class='p-error' *ngIf='!validSuperCategorieSectionLibelle'>Libelle est obligatoire.</small>
+                                        </div>
+
+                        </div>
+                    </p-tabPanel>
+
+                            <p-tabPanel header="{{'Categorie sections' | translate}}">
+                                <p-tabView [(activeIndex)]="activeTab">
+                                    <p-tabPanel header="Création">
+                                        <div class="grid">
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="1">Code<span style="color: red;">*</span></label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Code"
+                                                                       id="1" [(ngModel)]="categorieSectionsElement.code"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validCategorieSectionsCode}"  >
+                                                                <small class='p-error' *ngIf='!validCategorieSectionsCode'>Code est obligatoire.</small>
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="2">Libelle</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Libelle"
+                                                                       id="2" [(ngModel)]="categorieSectionsElement.libelle"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="3">Numero order</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="numeroOrder" [(ngModel)]="categorieSectionsElement.numeroOrder" placeholder="Numero order"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                <div class="field col-12 md:col-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addCategorieSections()"></button>
+                                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste {{item.categorieSections?.length > 0 ? '(' + item.categorieSections?.length + ')' : ''}}">
+                                            <div class="card">
+                                                <p-table [value]="item.categorieSections" [scrollable]="true" scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Code</th>
+                                                                        <th>Libelle</th>
+                                                                        <th>Numero order</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                        <td>{{p.code}}</td>
+                                                                        <td>{{p.libelle}}</td>
+                                                                        <td>{{p.numeroOrder}}</td>
+                                                            <td>
+                                                                <button (click)="deleteCategorieSection(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                <button (click)="editCategorieSection(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

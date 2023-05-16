@@ -1,0 +1,138 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'parcoursTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="1">{{'Date publication' | translate}}</label>
+                        <p-calendar id="1" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date publication' | translate}}"  [(ngModel)]="item.datePublication" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="2">{{'Date creation' | translate}}</label>
+                        <p-calendar id="2" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date creation' | translate}}"  [(ngModel)]="item.dateCreation" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="3">{{'Description' | translate}}</label>
+                        <textarea id="3" pInputTextarea rows="5" cols="30" [disabled]="true" placeholder="{{'Description' | translate}}"  [(ngModel)]="item.description"></textarea>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="4">{{'Code' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Code' | translate}}" autofocus  id="4" [(ngModel)]="item.code">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="5">{{'Libelle' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Libelle' | translate}}" autofocus  id="5" [(ngModel)]="item.libelle">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="6">{{'Numero order' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="6" [disabled]="true" placeholder="{{'Numero order' | translate}}" [(ngModel)]="item.numeroOrder"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="7">{{'Nombre cours' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="7" [disabled]="true" placeholder="{{'Nombre cours' | translate}}" [(ngModel)]="item.nombreCours"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="8">{{'Centre' | translate}}</label>
+                        <p-dropdown [options]="centres" [(ngModel)]="item.centre" id="8" [disabled]="true" optionLabel="ref" placeholder="{{'Centre' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="{{'Courss' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.courss" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Libelle</th>
+                                        <th>Description</th>
+                                        <th>Image</th>
+                                        <th>Etat cours</th>
+                                        <th>Nombre section finalise</th>
+                                        <th>Nombre section en cours</th>
+                                        <th>Nombre link en cours</th>
+                                        <th>Nombre link finalise</th>
+                                        <th>Numero order</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.code}}</td>
+                                        <td>{{p.libelle}}</td>
+                                        <td>{{p.description}}</td>
+                                        <td>{{p.image}}</td>
+                                        <td>{{p.etatCours?.libelle}}</td>
+                                        <td>{{p.nombreSectionFinalise}}</td>
+                                        <td>{{p.nombreSectionEnCours}}</td>
+                                        <td>{{p.nombreLinkEnCours}}</td>
+                                        <td>{{p.nombreLinkFinalise}}</td>
+                                        <td>{{p.numeroOrder}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="{{'Etudiants' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.etudiants" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Ref</th>
+                                        <th>Teacher locality</th>
+                                        <th>Group option</th>
+                                        <th>Email</th>
+                                        <th>Etat etudiant schedule</th>
+                                        <th>Groupe etude</th>
+                                        <th>Pack student</th>
+                                        <th>Statut social</th>
+                                        <th>Interet etudiant</th>
+                                        <th>Niveau etude</th>
+                                        <th>Skill</th>
+                                        <th>Fonction</th>
+                                        <th>Langue</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.ref}}</td>
+                                        <td>{{p.teacherLocality?.libelle}}</td>
+                                        <td>{{p.groupOption}}</td>
+                                        <td>{{p.email}}</td>
+                                        <td>{{p.etatEtudiantSchedule?.libelle}}</td>
+                                        <td>{{p.groupeEtude?.libelle}}</td>
+                                        <td>{{p.packStudent?.libelle}}</td>
+                                        <td>{{p.statutSocial?.libelle}}</td>
+                                        <td>{{p.interetEtudiant?.libelle}}</td>
+                                        <td>{{p.niveauEtude?.libelle}}</td>
+                                        <td>{{p.skill?.libelle}}</td>
+                                        <td>{{p.fonction?.libelle}}</td>
+                                        <td>{{p.langue?.libelle}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

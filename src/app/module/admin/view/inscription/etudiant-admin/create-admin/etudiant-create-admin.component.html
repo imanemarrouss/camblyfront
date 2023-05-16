@@ -1,0 +1,261 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'etudiantTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'etudiantTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="1">{{'etudiantRef' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'etudiantRef' | translate}}" id="1" [(ngModel)]="item.ref"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validEtudiantRef}"  />
+                                                    <small class='p-error' *ngIf='!validEtudiantRef'>Ref est obligatoire.</small>
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-2">
+                                                <label for="2">{{'etudiantTeacherLocality' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="teacherLocalitys" [(ngModel)]="item.teacherLocality" id="2" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantTeacherLocality' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateTeacherLocality('TeacherLocality')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="3">{{'etudiantGroupOption' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'etudiantGroupOption' | translate}}" id="3" [(ngModel)]="item.groupOption"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="4">{{'etudiantEmail' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'etudiantEmail' | translate}}" id="4" [(ngModel)]="item.email"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-2">
+                                                <label for="5">{{'etudiantEtatEtudiantSchedule' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="etatEtudiantSchedules" [(ngModel)]="item.etatEtudiantSchedule" id="5" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantEtatEtudiantSchedule' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateEtatEtudiantSchedule('EtatEtudiantSchedule')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="6">{{'etudiantParcours' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="parcourss" [(ngModel)]="item.parcours" id="6" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantParcours' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="8">{{'etudiantGroupeEtude' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="groupeEtudes" [(ngModel)]="item.groupeEtude" id="8" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantGroupeEtude' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateGroupeEtude('GroupeEtude')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-12  md:col-3">
+                                                <label>Groupe etudiant</label>
+                                                <p-multiSelect [options]="groupeEtudiantDetails" [(ngModel)]="item.groupeEtudiantDetails" itemSize="30" [virtualScroll]="true"
+                                                                                                                          defaultLabel="Select un groupeEtudiant" optionLabel="groupeEtudiant.id"  display="chip"></p-multiSelect>
+                                            </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="10">{{'etudiantPackStudent' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="packStudents" [(ngModel)]="item.packStudent" id="10" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantPackStudent' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreatePackStudent('PackStudent')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="11">{{'etudiantStatutSocial' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="statutSocials" [(ngModel)]="item.statutSocial" id="11" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantStatutSocial' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateStatutSocial('StatutSocial')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="12">{{'etudiantInteretEtudiant' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="interetEtudiants" [(ngModel)]="item.interetEtudiant" id="12" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantInteretEtudiant' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateInteretEtudiant('InteretEtudiant')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="13">{{'etudiantNiveauEtude' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="niveauEtudes" [(ngModel)]="item.niveauEtude" id="13" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantNiveauEtude' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateNiveauEtude('NiveauEtude')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="14">{{'etudiantSkill' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="skills" [(ngModel)]="item.skill" id="14" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantSkill' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateSkill('Skill')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="15">{{'etudiantFonction' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="fonctions" [(ngModel)]="item.fonction" id="15" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantFonction' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateFonction('Fonction')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="16">{{'etudiantLangue' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="langues" [(ngModel)]="item.langue" id="16" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantLangue' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateLangue('Langue')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                </div>
+                            </p-tabPanel>
+                                    <p-tabPanel header="{{'Quiz etudiants' | translate}}">
+                                        <p-tabView [(activeIndex)]="activeTab">
+                                            <p-tabPanel header="Création">
+                                                    <div class="grid">
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="1">Ref<span style="color: red;">*</span></label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Ref"
+                                                                               id="1" [(ngModel)]="quizEtudiantsElement.ref" autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validQuizEtudiantsRef}"  >
+                                                                        <small class='p-error' *ngIf='!validQuizEtudiantsRef'>Ref est obligatoire.</small>
+                                                                    </div>
+                                                                    <div class="field col-11 md:col-3">
+                                                                        <label>Quiz</label>
+                                                                        <p-dropdown  appendTo="body"  [options]="quizs" [(ngModel)]="quizEtudiantsElement.quiz"
+                                                                                     id="3"  [filter]="true" filterMatchMode="contains" [showClear]="true" optionLabel="lib"
+                                                                                     placeholder="Quiz"  >
+                                                                        </p-dropdown>
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="5">Note</label>
+                                                                        <p-inputNumber class="mb-2 mr-2" id="note" placeholder="Note"  [(ngModel)]="quizEtudiantsElement.note"></p-inputNumber>
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="6">Resultat</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Resultat"
+                                                                               id="6" [(ngModel)]="quizEtudiantsElement.resultat" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="7">Question current</label>
+                                                                        <p-inputNumber class="mb-2 mr-2" id="questionCurrent" placeholder="Question current"  [(ngModel)]="quizEtudiantsElement.questionCurrent"></p-inputNumber>
+                                                                        
+                                                                    </div>
+                                                        <div class="field col-12 md:col-1">
+                                                            <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addQuizEtudiants()"></button>
+                                                        </div>
+
+                                                    </div>
+                                            </p-tabPanel>
+                                            <p-tabPanel header="Liste {{item.quizEtudiants?.length > 0 ? '(' + item.quizEtudiants?.length + ')' : ''}}">
+                                                    <div class="card">
+                                                        <p-table [value]="item.quizEtudiants" [scrollable]="true" scrollHeight="200px">
+                                                            <ng-template pTemplate="header">
+                                                                <tr>
+                                                                                <th>Ref</th>
+                                                                                <th>Quiz</th>
+                                                                                <th>Note</th>
+                                                                                <th>Resultat</th>
+                                                                                <th>Question current</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </ng-template>
+                                                            <ng-template pTemplate="body" let-p>
+                                                                <tr>
+                                                                                <td>{{p.ref}}</td>
+                                                                            <td>{{p.quiz?.lib}}</td>
+                                                                                <td>{{p.note}}</td>
+                                                                                <td>{{p.resultat}}</td>
+                                                                                <td>{{p.questionCurrent}}</td>
+                                                                    <td>
+                                                                        <button (click)="deleteQuizEtudiant(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                        <button (click)="editQuizEtudiant(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                                    </td>
+                                                                </tr>
+                                                            </ng-template>
+                                                        </p-table>
+                                                    </div>
+
+                                            </p-tabPanel>
+                                        </p-tabView>
+                                    </p-tabPanel>
+
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple label="Valider"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-teacher-locality-create-admin></app-teacher-locality-create-admin>
+            <app-etat-etudiant-schedule-create-admin></app-etat-etudiant-schedule-create-admin>
+            <app-groupe-etude-create-admin></app-groupe-etude-create-admin>
+            <app-pack-student-create-admin></app-pack-student-create-admin>
+            <app-statut-social-create-admin></app-statut-social-create-admin>
+            <app-interet-etudiant-create-admin></app-interet-etudiant-create-admin>
+            <app-niveau-etude-create-admin></app-niveau-etude-create-admin>
+            <app-skill-create-admin></app-skill-create-admin>
+            <app-fonction-create-admin></app-fonction-create-admin>
+            <app-langue-create-admin></app-langue-create-admin>
+
+            <app-groupe-etudiant-create-admin></app-groupe-etudiant-create-admin>
+
+    </p-dialog>

@@ -1,0 +1,77 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'reponseTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'reponseTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="1">{{'reponseRef' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'reponseRef' | translate}}" id="1" [(ngModel)]="item.ref"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validReponseRef}"  />
+                                                    <small class='p-error' *ngIf='!validReponseRef'>Ref est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="2">{{'reponseLib' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'reponseLib' | translate}}" id="2" [(ngModel)]="item.lib"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validReponseLib}"  />
+                                                    <small class='p-error' *ngIf='!validReponseLib'>Lib est obligatoire.</small>
+                                                </div>
+
+
+
+                                            <div class="field col-11 md:col-5">
+                                                <label for="3">{{'reponseEtatReponse' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="etatReponses" [(ngModel)]="item.etatReponse" id="3" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'reponseEtatReponse' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateEtatReponse('EtatReponse')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <label for="4">{{'reponseNumero' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="4" placeholder="{{'reponseNumero' | translate}}" [(ngModel)]="item.numero"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-5">
+                                                <label for="5">{{'reponseQuestion' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="questions" [(ngModel)]="item.question" id="5" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'reponseQuestion' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateQuestion('Question')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple label="Valider"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-etat-reponse-create-admin></app-etat-reponse-create-admin>
+            <app-question-create-admin></app-question-create-admin>
+
+
+    </p-dialog>

@@ -1,0 +1,68 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'etatEtudiantTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="1">{{'Reference' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Reference' | translate}}" autofocus  id="1" [(ngModel)]="item.reference">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="2">{{'Username' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Username' | translate}}" autofocus  id="2" [(ngModel)]="item.username">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="3">{{'First name' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'First name' | translate}}" autofocus  id="3" [(ngModel)]="item.firstName">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="4">{{'Last name' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Last name' | translate}}" autofocus  id="4" [(ngModel)]="item.lastName">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="5">{{'Nationnalite' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Nationnalite' | translate}}" autofocus  id="5" [(ngModel)]="item.nationnalite">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="6">{{'Schedule1' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Schedule1' | translate}}" autofocus  id="6" [(ngModel)]="item.schedule1">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="7">{{'Schedule2' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Schedule2' | translate}}" autofocus  id="7" [(ngModel)]="item.schedule2">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="8">{{'Last class' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Last class' | translate}}" autofocus  id="8" [(ngModel)]="item.lastClass">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="9">{{'Nbr class' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Nbr class' | translate}}" autofocus  id="9" [(ngModel)]="item.nbrClass">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="10">{{'Etat' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Etat' | translate}}" autofocus  id="10" [(ngModel)]="item.etat">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="11">{{'Etat number' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="11" [disabled]="true" placeholder="{{'Etat number' | translate}}" [(ngModel)]="item.etatNumber"></p-inputNumber>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

@@ -1,0 +1,48 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'reponseEtudiantTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Ref' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Ref' | translate}}" autofocus  id="1" [(ngModel)]="item.ref">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Reponse' | translate}}</label>
+                        <p-dropdown [options]="reponses" [(ngModel)]="item.reponse" id="2" [disabled]="true" optionLabel="lib" placeholder="{{'Reponse' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'Answer' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Answer' | translate}}" autofocus  id="3" [(ngModel)]="item.answer">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'Quiz etudiant' | translate}}</label>
+                        <p-dropdown [options]="quizEtudiants" [(ngModel)]="item.quizEtudiant" id="4" [disabled]="true" optionLabel="ref" placeholder="{{'Quiz etudiant' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'Note' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'Note' | translate}}" [(ngModel)]="item.note"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'Question' | translate}}</label>
+                        <p-dropdown [options]="questions" [(ngModel)]="item.question" id="6" [disabled]="true" optionLabel="libelle" placeholder="{{'Question' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

@@ -1,0 +1,80 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'reclamationProfTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="1">{{'Reference' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Reference' | translate}}" autofocus  id="1" [(ngModel)]="item.reference">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="2">{{'Date reclamation' | translate}}</label>
+                        <p-calendar id="2" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date reclamation' | translate}}"  [(ngModel)]="item.dateReclamation" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="3">{{'Message' | translate}}</label>
+                        <textarea id="3" pInputTextarea rows="5" cols="30" [disabled]="true" placeholder="{{'Message' | translate}}"  [(ngModel)]="item.message"></textarea>
+                    </div>
+                    <div class="field align-inputswitch col-12  md:col-3">
+                        <div  class="label-inputswitch">
+                            <label for="4">{{'Traite' | translate}}</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch id="4"  [disabled]="true" [(ngModel)]="item.traite"></p-inputSwitch>
+                        </div>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="5">{{'Date traitement' | translate}}</label>
+                        <p-calendar id="5" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date traitement' | translate}}"  [(ngModel)]="item.dateTraitement" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="6">{{'Date reponse' | translate}}</label>
+                        <p-calendar id="6" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date reponse' | translate}}"  [(ngModel)]="item.dateReponse" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field align-inputswitch col-12  md:col-3">
+                        <div  class="label-inputswitch">
+                            <label for="7">{{'Post view' | translate}}</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch id="7"  [disabled]="true" [(ngModel)]="item.postView"></p-inputSwitch>
+                        </div>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="8">{{'Commentaire traiteur' | translate}}</label>
+                        <textarea id="8" pInputTextarea rows="5" cols="30" [disabled]="true" placeholder="{{'Commentaire traiteur' | translate}}"  [(ngModel)]="item.commentaireTraiteur"></textarea>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="9">{{'Objet reclamation prof' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Objet reclamation prof' | translate}}" autofocus  id="9" [(ngModel)]="item.objetReclamationProf">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="10">{{'Admin' | translate}}</label>
+                        <p-dropdown [options]="admins" [(ngModel)]="item.admin" id="10" [disabled]="true" optionLabel="id" placeholder="{{'Admin' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="11">{{'Prof' | translate}}</label>
+                        <p-dropdown [options]="profs" [(ngModel)]="item.prof" id="11" [disabled]="true" optionLabel="ref" placeholder="{{'Prof' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="12">{{'Type reclamation prof' | translate}}</label>
+                        <p-dropdown [options]="typeReclamationProfs" [(ngModel)]="item.typeReclamationProf" id="12" [disabled]="true" optionLabel="libelle" placeholder="{{'Type reclamation prof' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

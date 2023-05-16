@@ -1,0 +1,48 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'profReviewTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Etudiant' | translate}}</label>
+                        <p-dropdown [options]="etudiants" [(ngModel)]="item.etudiant" id="1" [disabled]="true" optionLabel="ref" placeholder="{{'Etudiant' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Prof' | translate}}</label>
+                        <p-dropdown [options]="profs" [(ngModel)]="item.prof" id="2" [disabled]="true" optionLabel="ref" placeholder="{{'Prof' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'Cours' | translate}}</label>
+                        <p-dropdown [options]="courss" [(ngModel)]="item.cours" id="3" [disabled]="true" optionLabel="libelle" placeholder="{{'Cours' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'Review' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="4" [disabled]="true" placeholder="{{'Review' | translate}}" [(ngModel)]="item.review"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'Comment' | translate}}</label>
+                        <textarea id="5" pInputTextarea rows="5" cols="30" [disabled]="true" placeholder="{{'Comment' | translate}}"  [(ngModel)]="item.comment"></textarea>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'Date review' | translate}}</label>
+                        <p-calendar id="6" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date review' | translate}}"  [(ngModel)]="item.dateReview" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

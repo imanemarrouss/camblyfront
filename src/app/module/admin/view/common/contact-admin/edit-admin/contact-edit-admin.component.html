@@ -1,0 +1,81 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'contactTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'contactTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="1">{{'contactName' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'contactName' | translate}}" id="1" [(ngModel)]="item.name"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="2">{{'contactEmail' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'contactEmail' | translate}}" id="2" [(ngModel)]="item.email"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="3">{{'contactPhone' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'contactPhone' | translate}}" id="3" [(ngModel)]="item.phone"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="4">{{'contactSetFrom' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'contactSetFrom' | translate}}" id="4" [(ngModel)]="item.setFrom"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="5">{{'contactDateContact' | translate}}</label>
+                                            <p-calendar appendTo="body" id="5"   [showTime]="true" [showSeconds]="false" placeholder="{{'contactDateContact' | translate}}"  [(ngModel)]="item.dateContact"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field align-inputswitch col-12  md:col-4">
+                                            <div  class="label-inputswitch">
+                                                <label for="6">{{'contactReplied' | translate}}</label>
+                                            </div>
+                                            <div class="input-switch">
+                                                <p-inputSwitch   appendTo="body" id="6"  [(ngModel)]="item.replied"
+                                                         >
+                                                </p-inputSwitch>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="7">{{'contactMessage' | translate}}</label>
+                                            <textarea appendTo="body" id="7" pInputTextarea rows="5" cols="30" placeholder="{{'contactMessage' | translate}}"  [(ngModel)]="item.message"
+                                                     ></textarea>
+                                            
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

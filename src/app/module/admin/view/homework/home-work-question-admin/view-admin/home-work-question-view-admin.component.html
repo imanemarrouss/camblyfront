@@ -1,0 +1,78 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'homeWorkQuestionTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="1">{{'Ref' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Ref' | translate}}" autofocus  id="1" [(ngModel)]="item.ref">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="2">{{'Libelle' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Libelle' | translate}}" autofocus  id="2" [(ngModel)]="item.libelle">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="3">{{'Numero' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="3" [disabled]="true" placeholder="{{'Numero' | translate}}" [(ngModel)]="item.numero"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="4">{{'Point reponse juste' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="4" [disabled]="true" placeholder="{{'Point reponse juste' | translate}}" [(ngModel)]="item.pointReponseJuste"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="5">{{'Point reponsefausse' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'Point reponsefausse' | translate}}" [(ngModel)]="item.pointReponsefausse"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="6">{{'Type de question' | translate}}</label>
+                        <p-dropdown [options]="typeDeQuestions" [(ngModel)]="item.typeDeQuestion" id="6" [disabled]="true" optionLabel="lib" placeholder="{{'Type de question' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="8">{{'Home work' | translate}}</label>
+                        <p-dropdown [options]="homeWorks" [(ngModel)]="item.homeWork" id="8" [disabled]="true" optionLabel="libelle" placeholder="{{'Home work' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="{{'Howe work q s t reponses' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.howeWorkQSTReponses" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Ref</th>
+                                        <th>Lib</th>
+                                        <th>Etat reponse</th>
+                                        <th>Numero</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.ref}}</td>
+                                        <td>{{p.lib}}</td>
+                                        <td>{{p.etatReponse?.libelle}}</td>
+                                        <td>{{p.numero}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

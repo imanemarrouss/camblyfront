@@ -1,0 +1,64 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'freeTrialformuleTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="1">{{'Code' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Code' | translate}}" autofocus  id="1" [(ngModel)]="item.code">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="2">{{'Inscription' | translate}}</label>
+                        <p-dropdown [options]="inscriptions" [(ngModel)]="item.inscription" id="2" [disabled]="true" optionLabel="id" placeholder="{{'Inscription' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="3">{{'Dayspeerweek' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Dayspeerweek' | translate}}" autofocus  id="3" [(ngModel)]="item.dayspeerweek">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="4">{{'Timeperday' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Timeperday' | translate}}" autofocus  id="4" [(ngModel)]="item.timeperday">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="5">{{'Teacher genderoption' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Teacher genderoption' | translate}}" autofocus  id="5" [(ngModel)]="item.teacherGenderoption">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="6">{{'Teacher age range' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Teacher age range' | translate}}" autofocus  id="6" [(ngModel)]="item.teacherAgeRange">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="7">{{'Teacher personnality' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Teacher personnality' | translate}}" autofocus  id="7" [(ngModel)]="item.teacherPersonnality">
+                    </div>
+                    <div class="field align-inputswitch col-12  md:col-4">
+                        <div  class="label-inputswitch">
+                            <label for="8">{{'Status' | translate}}</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch id="8"  [disabled]="true" [(ngModel)]="item.status"></p-inputSwitch>
+                        </div>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="9">{{'Date confirmation' | translate}}</label>
+                        <p-calendar id="9" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date confirmation' | translate}}"  [(ngModel)]="item.dateConfirmation" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

@@ -1,0 +1,93 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'newsTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'newsTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="1">{{'newsRef' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'newsRef' | translate}}" id="1" [(ngModel)]="item.ref"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validNewsRef}"  />
+                                            <small class='p-error' *ngIf='!validNewsRef'>Ref est obligatoire.</small>
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="2">{{'newsLibelle' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'newsLibelle' | translate}}" id="2" [(ngModel)]="item.libelle"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="3">{{'newsImage' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'newsImage' | translate}}" id="3" [(ngModel)]="item.image"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="4">{{'newsDescription' | translate}}</label>
+                                            <textarea appendTo="body" id="4" pInputTextarea rows="5" cols="30" placeholder="{{'newsDescription' | translate}}"  [(ngModel)]="item.description"
+                                                     ></textarea>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="5">{{'newsDateNews' | translate}}</label>
+                                            <p-calendar appendTo="body" id="5"   [showTime]="true" [showSeconds]="false" placeholder="{{'newsDateNews' | translate}}"  [(ngModel)]="item.dateNews"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="6">{{'newsDateDebut' | translate}}</label>
+                                            <p-calendar appendTo="body" id="6"   [showTime]="true" [showSeconds]="false" placeholder="{{'newsDateDebut' | translate}}"  [(ngModel)]="item.dateDebut"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="7">{{'newsDateFin' | translate}}</label>
+                                            <p-calendar appendTo="body" id="7"   [showTime]="true" [showSeconds]="false" placeholder="{{'newsDateFin' | translate}}"  [(ngModel)]="item.dateFin"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="8">{{'newsNumeroOrdre' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="8"
+                                                           placeholder="{{'newsNumeroOrdre' | translate}}" [(ngModel)]="item.numeroOrdre"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="9">{{'newsDestinataire' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'newsDestinataire' | translate}}" id="9" [(ngModel)]="item.destinataire"
+                                                     />
+                                            
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

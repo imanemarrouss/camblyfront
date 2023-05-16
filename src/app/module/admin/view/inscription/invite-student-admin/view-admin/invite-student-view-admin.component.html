@@ -1,0 +1,64 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'inviteStudentTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="1">{{'Code' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Code' | translate}}" autofocus  id="1" [(ngModel)]="item.code">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="2">{{'Etudiant' | translate}}</label>
+                        <p-dropdown [options]="etudiants" [(ngModel)]="item.etudiant" id="2" [disabled]="true" optionLabel="ref" placeholder="{{'Etudiant' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field align-inputswitch col-12  md:col-4">
+                        <div  class="label-inputswitch">
+                            <label for="3">{{'Is accepted' | translate}}</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch id="3"  [disabled]="true" [(ngModel)]="item.isAccepted"></p-inputSwitch>
+                        </div>
+                    </div>
+                    <div class="field align-inputswitch col-12  md:col-4">
+                        <div  class="label-inputswitch">
+                            <label for="4">{{'Is paid pack' | translate}}</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch id="4"  [disabled]="true" [(ngModel)]="item.isPaidPack"></p-inputSwitch>
+                        </div>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="5">{{'Email invited' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Email invited' | translate}}" autofocus  id="5" [(ngModel)]="item.emailInvited">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="6">{{'Date sent invitation' | translate}}</label>
+                        <p-calendar id="6" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date sent invitation' | translate}}"  [(ngModel)]="item.dateSentInvitation" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="7">{{'Date accept invitation' | translate}}</label>
+                        <p-calendar id="7" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date accept invitation' | translate}}"  [(ngModel)]="item.dateAcceptInvitation" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="8">{{'Date pay pack' | translate}}</label>
+                        <p-calendar id="8" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date pay pack' | translate}}"  [(ngModel)]="item.datePayPack" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

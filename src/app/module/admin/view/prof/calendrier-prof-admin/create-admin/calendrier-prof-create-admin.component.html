@@ -1,0 +1,90 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'calendrierProfTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'calendrierProfTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-4">
+                                                    <label for="1">{{'calendrierProfRef' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'calendrierProfRef' | translate}}" id="1" [(ngModel)]="item.ref"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validCalendrierProfRef}"  />
+                                                    <small class='p-error' *ngIf='!validCalendrierProfRef'>Ref est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-4">
+                                                    <label for="2">{{'calendrierProfStartTime' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'calendrierProfStartTime' | translate}}" id="2" [(ngModel)]="item.startTime"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-4">
+                                                    <label for="3">{{'calendrierProfEndTime' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'calendrierProfEndTime' | translate}}" id="3" [(ngModel)]="item.endTime"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-4">
+                                                    <label for="4">{{'calendrierProfStartRecur' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="4"  [showTime]="true" [showSeconds]="false" placeholder="{{'calendrierProfStartRecur' | translate}}"  [(ngModel)]="item.startRecur"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-4">
+                                                    <label for="5">{{'calendrierProfEndRecur' | translate}}</label>
+                                                    <p-calendar appendTo="body" id="5"  [showTime]="true" [showSeconds]="false" placeholder="{{'calendrierProfEndRecur' | translate}}"  [(ngModel)]="item.endRecur"
+                                                            dateFormat="{{dateFormat}}"  >
+                                                    </p-calendar>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-3">
+                                                <label for="6">{{'calendrierProfProf' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="profs" [(ngModel)]="item.prof" id="6" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" ref " placeholder="{{'calendrierProfProf' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateProf('Prof')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-3">
+                                                <label for="7">{{'calendrierProfEtudiant' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="etudiants" [(ngModel)]="item.etudiant" id="7" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" ref " placeholder="{{'calendrierProfEtudiant' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple label="Valider"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-prof-create-admin></app-prof-create-admin>
+
+
+    </p-dialog>

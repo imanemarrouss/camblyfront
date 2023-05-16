@@ -1,0 +1,217 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'inscriptionTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'inscriptionTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="1">{{'inscriptionNumeroInscription' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="1"
+                                                           placeholder="{{'inscriptionNumeroInscription' | translate}}" [(ngModel)]="item.numeroInscription"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="2">{{'inscriptionEtudiant' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="etudiants" [(ngModel)]="item.etudiant" id="2"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="ref" placeholder="{{'inscriptionEtudiant' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateEtudiant('Etudiant')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="3">{{'inscriptionEtatInscription' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="etatInscriptions" [(ngModel)]="item.etatInscription" id="3"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'inscriptionEtatInscription' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateEtatInscription('EtatInscription')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="4">{{'inscriptionParcours' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="parcourss" [(ngModel)]="item.parcours" id="4"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'inscriptionParcours' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="5">{{'inscriptionGroupeEtude' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="groupeEtudes" [(ngModel)]="item.groupeEtude" id="5"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'inscriptionGroupeEtude' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateGroupeEtude('GroupeEtude')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="6">{{'inscriptionStatutSocial' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="statutSocials" [(ngModel)]="item.statutSocial" id="6"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'inscriptionStatutSocial' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateStatutSocial('StatutSocial')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="7">{{'inscriptionInteretEtudiant' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="interetEtudiants" [(ngModel)]="item.interetEtudiant" id="7"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'inscriptionInteretEtudiant' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateInteretEtudiant('InteretEtudiant')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="8">{{'inscriptionNiveauEtude' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="niveauEtudes" [(ngModel)]="item.niveauEtude" id="8"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'inscriptionNiveauEtude' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateNiveauEtude('NiveauEtude')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="9">{{'inscriptionFonction' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="fonctions" [(ngModel)]="item.fonction" id="9"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'inscriptionFonction' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateFonction('Fonction')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="10">{{'inscriptionQuiz' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="quizs" [(ngModel)]="item.quiz" id="10"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="lib" placeholder="{{'inscriptionQuiz' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="11">{{'inscriptionNoteQuizNiveau' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="11"
+                                                           placeholder="{{'inscriptionNoteQuizNiveau' | translate}}" [(ngModel)]="item.noteQuizNiveau"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field align-inputswitch col-12  md:col-3">
+                                            <div  class="label-inputswitch">
+                                                <label for="12">{{'inscriptionQuizFinished' | translate}}</label>
+                                            </div>
+                                            <div class="input-switch">
+                                                <p-inputSwitch   appendTo="body" id="12"  [(ngModel)]="item.quizFinished"
+                                                         >
+                                                </p-inputSwitch>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="13">{{'inscriptionDateRegistration' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'inscriptionDateRegistration' | translate}}" id="13" [(ngModel)]="item.dateRegistration"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="14">{{'inscriptionDatedebutinscription' | translate}}</label>
+                                            <p-calendar appendTo="body" id="14"   [showTime]="true" [showSeconds]="false" placeholder="{{'inscriptionDatedebutinscription' | translate}}"  [(ngModel)]="item.datedebutinscription"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="15">{{'inscriptionDatefininscription' | translate}}</label>
+                                            <p-calendar appendTo="body" id="15"   [showTime]="true" [showSeconds]="false" placeholder="{{'inscriptionDatefininscription' | translate}}"  [(ngModel)]="item.datefininscription"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="16">{{'inscriptionPackStudent' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="packStudents" [(ngModel)]="item.packStudent" id="16"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'inscriptionPackStudent' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreatePackStudent('PackStudent')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="17">{{'inscriptionSkill' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="skills" [(ngModel)]="item.skill" id="17"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'inscriptionSkill' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateSkill('Skill')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="18">{{'inscriptionSkype' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'inscriptionSkype' | translate}}" id="18" [(ngModel)]="item.skype"
+                                                     />
+                                            
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-etudiant-create-admin></app-etudiant-create-admin>
+                    <app-etat-inscription-create-admin></app-etat-inscription-create-admin>
+                    <app-groupe-etude-create-admin></app-groupe-etude-create-admin>
+                    <app-statut-social-create-admin></app-statut-social-create-admin>
+                    <app-interet-etudiant-create-admin></app-interet-etudiant-create-admin>
+                    <app-niveau-etude-create-admin></app-niveau-etude-create-admin>
+                    <app-fonction-create-admin></app-fonction-create-admin>
+                    <app-pack-student-create-admin></app-pack-student-create-admin>
+                    <app-skill-create-admin></app-skill-create-admin>
+
+
+    </p-dialog>

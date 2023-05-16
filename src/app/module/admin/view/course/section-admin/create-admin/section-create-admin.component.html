@@ -1,0 +1,250 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'sectionTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'sectionTabPan' | translate}}">
+                                <div class="grid">
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="1">{{'sectionCode' | translate}}<span style="color: red;">*</span></label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'sectionCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                            [ngClass]="{'ng-invalid ng-dirty' : !validSectionCode}"  />
+                                                    <small class='p-error' *ngIf='!validSectionCode'>Code est obligatoire.</small>
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="2">{{'sectionLibelle' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'sectionLibelle' | translate}}" id="2" [(ngModel)]="item.libelle"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="3">{{'sectionUrlImage' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'sectionUrlImage' | translate}}" id="3" [(ngModel)]="item.urlImage"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="4">{{'sectionUrlImage2' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'sectionUrlImage2' | translate}}" id="4" [(ngModel)]="item.urlImage2"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="5">{{'sectionUrlImage3' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'sectionUrlImage3' | translate}}" id="5" [(ngModel)]="item.urlImage3"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="6">{{'sectionUrlVideo' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'sectionUrlVideo' | translate}}" id="6" [(ngModel)]="item.urlVideo"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="7">{{'sectionContenu' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'sectionContenu' | translate}}" id="7" [(ngModel)]="item.contenu"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="8">{{'sectionQuestions' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'sectionQuestions' | translate}}" id="8" [(ngModel)]="item.questions"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="9">{{'sectionIndicationProf' | translate}}</label>
+                                                    <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'sectionIndicationProf' | translate}}" id="9" [(ngModel)]="item.indicationProf"
+                                                             />
+                                                    
+                                                </div>
+
+
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="10">{{'sectionNumeroOrder' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="10" placeholder="{{'sectionNumeroOrder' | translate}}" [(ngModel)]="item.numeroOrder"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-2">
+                                                <label for="11">{{'sectionCategorieSection' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="categorieSections" [(ngModel)]="item.categorieSection" id="11" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" code " placeholder="{{'sectionCategorieSection' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateCategorieSection('CategorieSection')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                            <div class="field col-11 md:col-2">
+                                                <label for="12">{{'sectionCours' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="courss" [(ngModel)]="item.cours" id="12" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'sectionCours' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateCours('Cours')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="13">{{'sectionUrl' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="13" placeholder="{{'sectionUrl' | translate}}" [(ngModel)]="item.url"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                                <div class="field col-12 md:col-3">
+                                                    <label for="14">{{'sectionContent' | translate}}</label>
+                                                    <p-inputNumber class="mb-2 mr-2" id="14" placeholder="{{'sectionContent' | translate}}" [(ngModel)]="item.content"  >
+                                                    </p-inputNumber>
+                                                    
+                                                </div>
+
+                                            <div class="field col-11 md:col-2">
+                                                <label for="16">{{'sectionSessionCours' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="sessionCourss" [(ngModel)]="item.sessionCours" id="16" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" reference " placeholder="{{'sectionSessionCours' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                </div>
+                            </p-tabPanel>
+                                    <p-tabPanel header="{{'Section items' | translate}}">
+                                        <p-tabView [(activeIndex)]="activeTab">
+                                            <p-tabPanel header="Création">
+                                                    <div class="grid">
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="1">Image url</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Image url"
+                                                                               id="1" [(ngModel)]="sectionItemsElement.imageUrl" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="2">Response</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Response"
+                                                                               id="2" [(ngModel)]="sectionItemsElement.response" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="3">Transcription</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Transcription"
+                                                                               id="3" [(ngModel)]="sectionItemsElement.transcription" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="4">Translation</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Translation"
+                                                                               id="4" [(ngModel)]="sectionItemsElement.translation" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="5">Explanation</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Explanation"
+                                                                               id="5" [(ngModel)]="sectionItemsElement.explanation" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="6">Example</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Example"
+                                                                               id="6" [(ngModel)]="sectionItemsElement.example" autofocus   >
+                                                                        
+                                                                    </div>
+                                                                    <div class="field col-12 md:col-4">
+                                                                        <label for="7">Synonyms</label>
+                                                                        <input class="mb-2 mr-2" type="text" pInputText placeholder="Synonyms"
+                                                                               id="7" [(ngModel)]="sectionItemsElement.synonyms" autofocus   >
+                                                                        
+                                                                    </div>
+                                                        <div class="field col-12 md:col-1">
+                                                            <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addSectionItems()"></button>
+                                                        </div>
+
+                                                    </div>
+                                            </p-tabPanel>
+                                            <p-tabPanel header="Liste {{item.sectionItems?.length > 0 ? '(' + item.sectionItems?.length + ')' : ''}}">
+                                                    <div class="card">
+                                                        <p-table [value]="item.sectionItems" [scrollable]="true" scrollHeight="200px">
+                                                            <ng-template pTemplate="header">
+                                                                <tr>
+                                                                                <th>Image url</th>
+                                                                                <th>Response</th>
+                                                                                <th>Transcription</th>
+                                                                                <th>Translation</th>
+                                                                                <th>Explanation</th>
+                                                                                <th>Example</th>
+                                                                                <th>Synonyms</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </ng-template>
+                                                            <ng-template pTemplate="body" let-p>
+                                                                <tr>
+                                                                                <td>{{p.imageUrl}}</td>
+                                                                                <td>{{p.response}}</td>
+                                                                                <td>{{p.transcription}}</td>
+                                                                                <td>{{p.translation}}</td>
+                                                                                <td>{{p.explanation}}</td>
+                                                                                <td>{{p.example}}</td>
+                                                                                <td>{{p.synonyms}}</td>
+                                                                    <td>
+                                                                        <button (click)="deleteSectionItem(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                        <button (click)="editSectionItem(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                                    </td>
+                                                                </tr>
+                                                            </ng-template>
+                                                        </p-table>
+                                                    </div>
+
+                                            </p-tabPanel>
+                                        </p-tabView>
+                                    </p-tabPanel>
+
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple label="Valider"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-categorie-section-create-admin></app-categorie-section-create-admin>
+            <app-cours-create-admin></app-cours-create-admin>
+
+
+    </p-dialog>

@@ -1,0 +1,84 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'groupeEtudiantTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="1">{{'Libelle' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Libelle' | translate}}" autofocus  id="1" [(ngModel)]="item.libelle">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="2">{{'Niveau' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Niveau' | translate}}" autofocus  id="2" [(ngModel)]="item.niveau">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="3">{{'Date debut' | translate}}</label>
+                        <p-calendar id="3" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date debut' | translate}}"  [(ngModel)]="item.dateDebut" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="4">{{'Date fin' | translate}}</label>
+                        <p-calendar id="4" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date fin' | translate}}"  [(ngModel)]="item.dateFin" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="5">{{'Nombre place' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'Nombre place' | translate}}" [(ngModel)]="item.nombrePlace"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="6">{{'Nombre placevide' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="6" [disabled]="true" placeholder="{{'Nombre placevide' | translate}}" [(ngModel)]="item.nombrePlacevide"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="7">{{'Nombre place non vide' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="7" [disabled]="true" placeholder="{{'Nombre place non vide' | translate}}" [(ngModel)]="item.nombrePlaceNonVide"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="9">{{'Groupe etude' | translate}}</label>
+                        <p-dropdown [options]="groupeEtudes" [(ngModel)]="item.groupeEtude" id="9" [disabled]="true" optionLabel="libelle" placeholder="{{'Groupe etude' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="10">{{'Parcours' | translate}}</label>
+                        <p-dropdown [options]="parcourss" [(ngModel)]="item.parcours" id="10" [disabled]="true" optionLabel="libelle" placeholder="{{'Parcours' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="11">{{'Prof' | translate}}</label>
+                        <p-dropdown [options]="profs" [(ngModel)]="item.prof" id="11" [disabled]="true" optionLabel="ref" placeholder="{{'Prof' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="{{'Groupe etudiant details' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.groupeEtudiantDetails" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Etudiant</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.etudiant?.ref}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

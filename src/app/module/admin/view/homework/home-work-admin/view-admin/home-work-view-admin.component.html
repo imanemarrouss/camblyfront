@@ -1,0 +1,100 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'homeWorkTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Libelle' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Libelle' | translate}}" autofocus  id="1" [(ngModel)]="item.libelle">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Url image' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Url image' | translate}}" autofocus  id="2" [(ngModel)]="item.urlImage">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'Url video' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Url video' | translate}}" autofocus  id="3" [(ngModel)]="item.urlVideo">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'Cours' | translate}}</label>
+                        <p-dropdown [options]="courss" [(ngModel)]="item.cours" id="6" [disabled]="true" optionLabel="libelle" placeholder="{{'Cours' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="7">{{'Type home work' | translate}}</label>
+                        <p-dropdown [options]="typeHomeWorks" [(ngModel)]="item.typeHomeWork" id="7" [disabled]="true" optionLabel="lib" placeholder="{{'Type home work' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="{{'Home work questions' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.homeWorkQuestions" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Ref</th>
+                                        <th>Libelle</th>
+                                        <th>Numero</th>
+                                        <th>Point reponse juste</th>
+                                        <th>Point reponsefausse</th>
+                                        <th>Type de question</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.ref}}</td>
+                                        <td>{{p.libelle}}</td>
+                                        <td>{{p.numero}}</td>
+                                        <td>{{p.pointReponseJuste}}</td>
+                                        <td>{{p.pointReponsefausse}}</td>
+                                        <td>{{p.typeDeQuestion?.lib}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="{{'Home work etudiants' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.homeWorkEtudiants" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Etudiant</th>
+                                        <th>Note</th>
+                                        <th>Resultat home work</th>
+                                        <th>Date home work</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.etudiant?.ref}}</td>
+                                        <td>{{p.note}}</td>
+                                        <td>{{p.resultatHomeWork?.libelle}}</td>
+                                        <td>{{p.dateHomeWork | date: dateFormatColumn}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

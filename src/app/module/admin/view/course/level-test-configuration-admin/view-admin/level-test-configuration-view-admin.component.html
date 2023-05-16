@@ -1,0 +1,36 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'levelTestConfigurationTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Note min' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="1" [disabled]="true" placeholder="{{'Note min' | translate}}" [(ngModel)]="item.noteMin"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Note max' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="2" [disabled]="true" placeholder="{{'Note max' | translate}}" [(ngModel)]="item.noteMax"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'Parcours' | translate}}</label>
+                        <p-dropdown [options]="parcourss" [(ngModel)]="item.parcours" id="3" [disabled]="true" optionLabel="libelle" placeholder="{{'Parcours' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

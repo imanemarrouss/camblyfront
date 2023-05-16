@@ -1,0 +1,111 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'freeTrialDetailTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'freeTrialDetailTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                    <div class="field col-11 md:col-3">
+                                            <label for="1">{{'freeTrialDetailFreeTrial' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="freeTrials" [(ngModel)]="item.freeTrial" id="1"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="reference" placeholder="{{'freeTrialDetailFreeTrial' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateFreeTrial('FreeTrial')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-3">
+                                            <label for="2">{{'freeTrialDetailEtudiant' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="etudiants" [(ngModel)]="item.etudiant" id="2"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="ref" placeholder="{{'freeTrialDetailEtudiant' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                                        <div class="field align-inputswitch col-12  md:col-4">
+                                            <div  class="label-inputswitch">
+                                                <label for="3">{{'freeTrialDetailPresence' | translate}}</label>
+                                            </div>
+                                            <div class="input-switch">
+                                                <p-inputSwitch   appendTo="body" id="3"  [(ngModel)]="item.presence"
+                                                         >
+                                                </p-inputSwitch>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="field align-inputswitch col-12  md:col-4">
+                                            <div  class="label-inputswitch">
+                                                <label for="4">{{'freeTrialDetailWhatsUpMessageSent' | translate}}</label>
+                                            </div>
+                                            <div class="input-switch">
+                                                <p-inputSwitch   appendTo="body" id="4"  [(ngModel)]="item.whatsUpMessageSent"
+                                                         >
+                                                </p-inputSwitch>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="5">{{'freeTrialDetailDateEnvoiwhatsUpMessage' | translate}}</label>
+                                            <p-calendar appendTo="body" id="5"   [showTime]="true" [showSeconds]="false" placeholder="{{'freeTrialDetailDateEnvoiwhatsUpMessage' | translate}}"  [(ngModel)]="item.dateEnvoiwhatsUpMessage"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field align-inputswitch col-12  md:col-4">
+                                            <div  class="label-inputswitch">
+                                                <label for="6">{{'freeTrialDetailEmailMessageSent' | translate}}</label>
+                                            </div>
+                                            <div class="input-switch">
+                                                <p-inputSwitch   appendTo="body" id="6"  [(ngModel)]="item.emailMessageSent"
+                                                         >
+                                                </p-inputSwitch>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="7">{{'freeTrialDetailDateEnvoiEmailMessage' | translate}}</label>
+                                            <p-calendar appendTo="body" id="7"   [showTime]="true" [showSeconds]="false" placeholder="{{'freeTrialDetailDateEnvoiEmailMessage' | translate}}"  [(ngModel)]="item.dateEnvoiEmailMessage"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field align-inputswitch col-12  md:col-4">
+                                            <div  class="label-inputswitch">
+                                                <label for="8">{{'freeTrialDetailAbonne' | translate}}</label>
+                                            </div>
+                                            <div class="input-switch">
+                                                <p-inputSwitch   appendTo="body" id="8"  [(ngModel)]="item.abonne"
+                                                         >
+                                                </p-inputSwitch>
+                                                
+                                            </div>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-free-trial-create-admin></app-free-trial-create-admin>
+
+
+    </p-dialog>

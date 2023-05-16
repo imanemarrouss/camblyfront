@@ -1,0 +1,56 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'priceTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="1">{{'Price' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="1" [disabled]="true" placeholder="{{'Price' | translate}}" [(ngModel)]="item.price"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="2">{{'Old price' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="2" [disabled]="true" placeholder="{{'Old price' | translate}}" [(ngModel)]="item.oldPrice"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="3">{{'Lib' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Lib' | translate}}" autofocus  id="3" [(ngModel)]="item.lib">
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="4">{{'Nre course' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="4" [disabled]="true" placeholder="{{'Nre course' | translate}}" [(ngModel)]="item.nreCourse"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="5">{{'Nre hours' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'Nre hours' | translate}}" [(ngModel)]="item.nreHours"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="6">{{'Nre month' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="6" [disabled]="true" placeholder="{{'Nre month' | translate}}" [(ngModel)]="item.nreMonth"></p-inputNumber>
+                    </div>
+                    <div class="field align-inputswitch col-12  md:col-4">
+                        <div  class="label-inputswitch">
+                            <label for="7">{{'For group' | translate}}</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch id="7"  [disabled]="true" [(ngModel)]="item.forGroup"></p-inputSwitch>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

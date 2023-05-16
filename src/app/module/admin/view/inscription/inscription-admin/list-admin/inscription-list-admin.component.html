@@ -1,0 +1,395 @@
+<div class="grid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Inscription')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.numeroInscriptionMin" id="1-1"></p-inputNumber>
+                            <label for="1-1">{{'Numero inscription' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.numeroInscriptionMax" id="1-2"></p-inputNumber>
+                            <label for="1-2">{{'Numero inscription' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="etudiants" [(ngModel)]="criteria.etudiant" id="2" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Etudiant' | translate}}" optionLabel="ref">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="etatInscriptions" [(ngModel)]="criteria.etatInscription" id="3" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Etat inscription' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="parcourss" [(ngModel)]="criteria.parcours" id="4" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Parcours' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="groupeEtudes" [(ngModel)]="criteria.groupeEtude" id="5" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Groupe etude' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="statutSocials" [(ngModel)]="criteria.statutSocial" id="6" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Statut social' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="interetEtudiants" [(ngModel)]="criteria.interetEtudiant" id="7" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Interet etudiant' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="niveauEtudes" [(ngModel)]="criteria.niveauEtude" id="8" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Niveau etude' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="fonctions" [(ngModel)]="criteria.fonction" id="9" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Fonction' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="quizs" [(ngModel)]="criteria.quiz" id="10" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Quiz' | translate}}" optionLabel="lib">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.noteQuizNiveauMin" id="11-1"></p-inputNumber>
+                            <label for="11-1">{{'Note quiz niveau' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.noteQuizNiveauMax" id="11-2"></p-inputNumber>
+                            <label for="11-2">{{'Note quiz niveau' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown  id="12" [options]="yesOrNoQuizFinished" [(ngModel)]="criteria.quizFinished"
+                                    [filter]="false" [showClear]="true"  placeholder="{{'Quiz finished' | translate}}" optionLabel="label" optionValue="value">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="13" type="text"  [(ngModel)]="criteria.dateRegistrationLike">
+                            <label for="13">{{'Date registration' | translate}}</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.datedebutinscriptionFrom"
+                                    id="14-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="14-1">{{'Datedebutinscription' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.datedebutinscriptionTo"
+                                    id="14-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="14-2">{{'Datedebutinscription' | translate}} Max</label>
+                        </span>
+
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.datefininscriptionFrom"
+                                    id="15-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="15-1">{{'Datefininscription' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.datefininscriptionTo"
+                                    id="15-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="15-2">{{'Datefininscription' | translate}} Max</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="packStudents" [(ngModel)]="criteria.packStudent" id="16" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Pack student' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="skills" [(ngModel)]="criteria.skill" id="17" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Skill' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="18" type="text"  [(ngModel)]="criteria.skypeLike">
+                            <label for="18">{{'Skype' | translate}}</label>
+                        </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['numeroInscription', 'etudiantref', 'etatInscriptionlibelle', 'parcourslibelle', 'groupeEtudelibelle', 'statutSociallibelle', 'interetEtudiantlibelle', 'niveauEtudelibelle', 'fonctionlibelle', 'quizlib', 'noteQuizNiveau', 'quizFinished', 'dateRegistration', 'datedebutinscription', 'datefininscription', 'packStudentlibelle', 'skilllibelle', 'skype']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'Les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'inscriptionHeader' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                        <th pSortableColumn="numeroInscription">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Numero inscription' | translate}}</span>
+                                <p-sortIcon field="numeroInscription"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="etudiant">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Etudiant' | translate}}</span>
+                                <p-sortIcon field="etudiant"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="etatInscription">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Etat inscription' | translate}}</span>
+                                <p-sortIcon field="etatInscription"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="parcours">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Parcours' | translate}}</span>
+                                <p-sortIcon field="parcours"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="groupeEtude">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Groupe etude' | translate}}</span>
+                                <p-sortIcon field="groupeEtude"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="statutSocial">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Statut social' | translate}}</span>
+                                <p-sortIcon field="statutSocial"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="interetEtudiant">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Interet etudiant' | translate}}</span>
+                                <p-sortIcon field="interetEtudiant"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="niveauEtude">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Niveau etude' | translate}}</span>
+                                <p-sortIcon field="niveauEtude"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="fonction">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Fonction' | translate}}</span>
+                                <p-sortIcon field="fonction"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                <!-- 
+                        <th pSortableColumn="quiz">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Quiz' | translate}}</span>
+                                <p-sortIcon field="quiz"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="noteQuizNiveau">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Note quiz niveau' | translate}}</span>
+                                <p-sortIcon field="noteQuizNiveau"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="quizFinished">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Quiz finished' | translate}}</span>
+                                <p-sortIcon field="quizFinished"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="dateRegistration">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Date registration' | translate}}</span>
+                                <p-sortIcon field="dateRegistration"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.dateRegistration" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="datedebutinscription">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Datedebutinscription' | translate}}</span>
+                                <p-sortIcon field="datedebutinscription"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="datefininscription">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Datefininscription' | translate}}</span>
+                                <p-sortIcon field="datefininscription"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="packStudent">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Pack student' | translate}}</span>
+                                <p-sortIcon field="packStudent"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="skill">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Skill' | translate}}</span>
+                                <p-sortIcon field="skill"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="skype">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Skype' | translate}}</span>
+                                <p-sortIcon field="skype"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.skype" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                --> 
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                        <td>{{element.numeroInscription}}</td>
+                            
+                            
+                        <td>{{element.etudiant?.ref}}</td>
+                            
+                            
+                        <td>{{element.etatInscription?.libelle}}</td>
+                            
+                            
+                        <td>{{element.parcours?.libelle}}</td>
+                            
+                            
+                        <td>{{element.groupeEtude?.libelle}}</td>
+                            
+                            
+                        <td>{{element.statutSocial?.libelle}}</td>
+                            
+                            
+                        <td>{{element.interetEtudiant?.libelle}}</td>
+                            
+                            
+                        <td>{{element.niveauEtude?.libelle}}</td>
+                            
+                            
+                        <td>{{element.fonction?.libelle}}</td>
+                            
+                             <!-- 
+                        <td>{{element.quiz?.lib}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.noteQuizNiveau}}</td>
+                             --> 
+                             <!-- 
+                        <td><i *ngIf="element.quizFinished" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!element.quizFinished" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+                             --> 
+                             <!-- 
+                        <td>{{element.dateRegistration}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.datedebutinscription | date :'dd/MM/yyyy HH:mm' }}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.datefininscription | date :'dd/MM/yyyy HH:mm' }}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.packStudent?.libelle}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.skill?.libelle}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.skype}}</td>
+                             --> 
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning" (click)="duplicate(element)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'inscription' : 'inscriptions' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-inscription-create-admin></app-inscription-create-admin>
+        <app-inscription-edit-admin></app-inscription-edit-admin>
+        <app-inscription-view-admin></app-inscription-view-admin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

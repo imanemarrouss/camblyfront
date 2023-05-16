@@ -1,0 +1,178 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'vocabularyQuizTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'vocabularyQuizTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="1">{{'vocabularyQuizLibelle' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'vocabularyQuizLibelle' | translate}}" id="1" [(ngModel)]="item.libelle"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validVocabularyQuizLibelle}"  />
+                                            <small class='p-error' *ngIf='!validVocabularyQuizLibelle'>Libelle est obligatoire.</small>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="2">{{'vocabularyQuizDateDebut' | translate}}</label>
+                                            <p-calendar appendTo="body" id="2"   [showTime]="true" [showSeconds]="false" placeholder="{{'vocabularyQuizDateDebut' | translate}}"  [(ngModel)]="item.dateDebut"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="3">{{'vocabularyQuizDateFin' | translate}}</label>
+                                            <p-calendar appendTo="body" id="3"   [showTime]="true" [showSeconds]="false" placeholder="{{'vocabularyQuizDateFin' | translate}}"  [(ngModel)]="item.dateFin"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+
+
+                                    <div class="field col-11 md:col-5">
+                                            <label for="5">{{'vocabularyQuizSection' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="sections" [(ngModel)]="item.section" id="5"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="code" placeholder="{{'vocabularyQuizSection' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateSection('Section')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                            <p-tabPanel header="{{'Vocabularys' | translate}}">
+                                <p-tabView [(activeIndex)]="activeTab">
+                                    <p-tabPanel header="Création">
+                                        <div class="grid">
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="1">Ref</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Ref"
+                                                                       id="1" [(ngModel)]="vocabularysElement.ref"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="2">Numero</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="numero" [(ngModel)]="vocabularysElement.numero" placeholder="Numero"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="3">Word</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Word"
+                                                                       id="3" [(ngModel)]="vocabularysElement.word"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="4">Libelle</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Libelle"
+                                                                       id="4" [(ngModel)]="vocabularysElement.libelle"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="5">Result</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Result"
+                                                                       id="5" [(ngModel)]="vocabularysElement.result"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="6">Explication</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Explication"
+                                                                       id="6" [(ngModel)]="vocabularysElement.explication"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="7">Exemple</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Exemple"
+                                                                       id="7" [(ngModel)]="vocabularysElement.exemple"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="8">Image</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Image"
+                                                                       id="8" [(ngModel)]="vocabularysElement.image"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Section</label>
+                                                                <p-dropdown appendTo="body" [options]="sections" [(ngModel)]="vocabularysElement.section"
+                                                                        id="9"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="code" placeholder="Section"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateSection('Section')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                <div class="field col-12 md:col-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addVocabularys()"></button>
+                                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste {{item.vocabularys?.length > 0 ? '(' + item.vocabularys?.length + ')' : ''}}">
+                                            <div class="card">
+                                                <p-table [value]="item.vocabularys" [scrollable]="true" scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Ref</th>
+                                                                        <th>Numero</th>
+                                                                        <th>Word</th>
+                                                                        <th>Libelle</th>
+                                                                        <th>Result</th>
+                                                                        <th>Explication</th>
+                                                                        <th>Exemple</th>
+                                                                        <th>Image</th>
+                                                                        <th>Section</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                        <td>{{p.ref}}</td>
+                                                                        <td>{{p.numero}}</td>
+                                                                        <td>{{p.word}}</td>
+                                                                        <td>{{p.libelle}}</td>
+                                                                        <td>{{p.result}}</td>
+                                                                        <td>{{p.explication}}</td>
+                                                                        <td>{{p.exemple}}</td>
+                                                                        <td>{{p.image}}</td>
+                                                                    <td>{{p.section?.code}}</td>
+                                                            <td>
+                                                                <button (click)="deleteVocabulary(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                <button (click)="editVocabulary(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-section-create-admin></app-section-create-admin>
+
+                            <app-section-create-admin></app-section-create-admin>
+
+    </p-dialog>

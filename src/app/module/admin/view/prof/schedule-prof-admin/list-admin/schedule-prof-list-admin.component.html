@@ -1,0 +1,262 @@
+<div class="grid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('ScheduleProf')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="1" type="text"  [(ngModel)]="criteria.subjectLike">
+                            <label for="1">{{'Subject' | translate}}</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.startTimeFrom"
+                                    id="2-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="2-1">{{'Start time' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.startTimeTo"
+                                    id="2-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="2-2">{{'Start time' | translate}} Max</label>
+                        </span>
+
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.endTimeFrom"
+                                    id="3-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="3-1">{{'End time' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.endTimeTo"
+                                    id="3-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="3-2">{{'End time' | translate}} Max</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="4" type="text"  [(ngModel)]="criteria.refLike">
+                            <label for="4">{{'Ref' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="groupeEtudiants" [(ngModel)]="criteria.groupeEtudiant" id="5" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Groupe etudiant' | translate}}" optionLabel="id">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="profs" [(ngModel)]="criteria.prof" id="6" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Prof' | translate}}" optionLabel="ref">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="courss" [(ngModel)]="criteria.cours" id="7" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Cours' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="8" type="text"  [(ngModel)]="criteria.grpNameLike">
+                            <label for="8">{{'Grp name' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="9" type="text"  [(ngModel)]="criteria.profNameLike">
+                            <label for="9">{{'Prof name' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.profsIdMin" id="10-1"></p-inputNumber>
+                            <label for="10-1">{{'Profs id' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.profsIdMax" id="10-2"></p-inputNumber>
+                            <label for="10-2">{{'Profs id' | translate}} Max</label>
+                       </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['subject', 'startTime', 'endTime', 'ref', 'groupeEtudiantid', 'profref', 'courslibelle', 'grpName', 'profName', 'profsId']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'Les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'scheduleProfHeader' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                        <th pSortableColumn="subject">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Subject' | translate}}</span>
+                                <p-sortIcon field="subject"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.subject" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="startTime">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Start time' | translate}}</span>
+                                <p-sortIcon field="startTime"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="endTime">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'End time' | translate}}</span>
+                                <p-sortIcon field="endTime"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="ref">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Ref' | translate}}</span>
+                                <p-sortIcon field="ref"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.ref" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="groupeEtudiant">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Groupe etudiant' | translate}}</span>
+                                <p-sortIcon field="groupeEtudiant"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="prof">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Prof' | translate}}</span>
+                                <p-sortIcon field="prof"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="cours">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Cours' | translate}}</span>
+                                <p-sortIcon field="cours"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="grpName">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Grp name' | translate}}</span>
+                                <p-sortIcon field="grpName"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.grpName" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="profName">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Prof name' | translate}}</span>
+                                <p-sortIcon field="profName"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.profName" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                <!-- 
+                        <th pSortableColumn="profsId">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Profs id' | translate}}</span>
+                                <p-sortIcon field="profsId"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                        <td>{{element.subject}}</td>
+                            
+                            
+                        <td>{{element.startTime | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td>{{element.endTime | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td>{{element.ref}}</td>
+                            
+                            
+                        <td>{{element.groupeEtudiant?.id}}</td>
+                            
+                            
+                        <td>{{element.prof?.ref}}</td>
+                            
+                            
+                        <td>{{element.cours?.libelle}}</td>
+                            
+                            
+                        <td>{{element.grpName}}</td>
+                            
+                            
+                        <td>{{element.profName}}</td>
+                            
+                             <!-- 
+                        <td>{{element.profsId}}</td>
+                             --> 
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning" (click)="duplicate(element)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'schedule prof' : 'schedule profs' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-schedule-prof-create-admin></app-schedule-prof-create-admin>
+        <app-schedule-prof-edit-admin></app-schedule-prof-edit-admin>
+        <app-schedule-prof-view-admin></app-schedule-prof-view-admin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

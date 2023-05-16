@@ -1,0 +1,462 @@
+<div class="grid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('FreeTrial')"></button>
+                    <button [disabled]="isSelectionDisabled()" pButton pRipple label=" {{'delete' | translate}}" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)=deleteMultiple()></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="1" type="text"  [(ngModel)]="criteria.referenceLike">
+                            <label for="1">{{'Reference' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="profs" [(ngModel)]="criteria.prof" id="2" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Prof' | translate}}" optionLabel="ref">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="niveauEtudes" [(ngModel)]="criteria.niveauEtude" id="3" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Niveau etude' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateFreeTrialFrom"
+                                    id="4-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="4-1">{{'Date free trial' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateFreeTrialTo"
+                                    id="4-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="4-2">{{'Date free trial' | translate}} Max</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="5" type="text"  [(ngModel)]="criteria.linkLike">
+                            <label for="5">{{'Link' | translate}}</label>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown  id="6" [options]="yesOrNoEmailTeacherSent" [(ngModel)]="criteria.emailTeacherSent"
+                                    [filter]="false" [showClear]="true"  placeholder="{{'Email teacher sent' | translate}}" optionLabel="label" optionValue="value">
+                            </p-dropdown>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.emailTeacherSendingDateFrom"
+                                    id="7-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="7-1">{{'Email teacher sending date' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.emailTeacherSendingDateTo"
+                                    id="7-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="7-2">{{'Email teacher sending date' | translate}} Max</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown  id="8" [options]="yesOrNoWhatsTeacherSent" [(ngModel)]="criteria.whatsTeacherSent"
+                                    [filter]="false" [showClear]="true"  placeholder="{{'Whats teacher sent' | translate}}" optionLabel="label" optionValue="value">
+                            </p-dropdown>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.whatsTeacherSendingDateFrom"
+                                    id="9-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="9-1">{{'Whats teacher sending date' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.whatsTeacherSendingDateTo"
+                                    id="9-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="9-2">{{'Whats teacher sending date' | translate}} Max</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="freeTrialStudentWhatsTemplates" [(ngModel)]="criteria.freeTrialStudentWhatsTemplate" id="10" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Free trial student whats template' | translate}}" optionLabel="id">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="freeTrialStudentEmailTemplates" [(ngModel)]="criteria.freeTrialStudentEmailTemplate" id="11" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Free trial student email template' | translate}}" optionLabel="id">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="freeTrialTeacherEmailTemplates" [(ngModel)]="criteria.freeTrialTeacherEmailTemplate" id="12" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Free trial teacher email template' | translate}}" optionLabel="id">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="freeTrialTeacherWhatsTemplates" [(ngModel)]="criteria.freeTrialTeacherWhatsTemplate" id="13" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Free trial teacher whats template' | translate}}" optionLabel="id">
+                            </p-dropdown>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateFreeTrialPremierRappelFrom"
+                                    id="14-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="14-1">{{'Date free trial premier rappel' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateFreeTrialPremierRappelTo"
+                                    id="14-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="14-2">{{'Date free trial premier rappel' | translate}} Max</label>
+                        </span>
+
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateFreeTrialPremierDeuxiemeRappelFrom"
+                                    id="15-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="15-1">{{'Date free trial premier deuxieme rappel' | translate}} Min</label>
+                        </span>
+
+                         <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-calendar class="mr-2" [(ngModel)]="criteria.dateFreeTrialPremierDeuxiemeRappelTo"
+                                    id="15-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="15-2">{{'Date free trial premier deuxieme rappel' | translate}} Max</label>
+                        </span>
+
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nombreStudentTotalMin" id="16-1"></p-inputNumber>
+                            <label for="16-1">{{'Nombre student total' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nombreStudentTotalMax" id="16-2"></p-inputNumber>
+                            <label for="16-2">{{'Nombre student total' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="freeTrialConfigurations" [(ngModel)]="criteria.freeTrialConfiguration" id="17" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Free trial configuration' | translate}}" optionLabel="id">
+                            </p-dropdown>
+                        </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nombreStudentAbonneMin" id="18-1"></p-inputNumber>
+                            <label for="18-1">{{'Nombre student abonne' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nombreStudentAbonneMax" id="18-2"></p-inputNumber>
+                            <label for="18-2">{{'Nombre student abonne' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nombreStudentPresentMin" id="19-1"></p-inputNumber>
+                            <label for="19-1">{{'Nombre student present' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.nombreStudentPresentMax" id="19-2"></p-inputNumber>
+                            <label for="19-2">{{'Nombre student present' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="statutFreeTrials" [(ngModel)]="criteria.statutFreeTrial" id="20" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Statut free trial' | translate}}" optionLabel="libelle">
+                            </p-dropdown>
+                        </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['reference', 'profref', 'niveauEtudelibelle', 'dateFreeTrial', 'link', 'emailTeacherSent', 'emailTeacherSendingDate', 'whatsTeacherSent', 'whatsTeacherSendingDate', 'freeTrialStudentWhatsTemplateid', 'freeTrialStudentEmailTemplateid', 'freeTrialTeacherEmailTemplateid', 'freeTrialTeacherWhatsTemplateid', 'dateFreeTrialPremierRappel', 'dateFreeTrialPremierDeuxiemeRappel', 'nombreStudentTotal', 'freeTrialConfigurationid', 'nombreStudentAbonne', 'nombreStudentPresent', 'statutFreeTriallibelle']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'Les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'freeTrialHeader' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                        <th pSortableColumn="reference">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Reference' | translate}}</span>
+                                <p-sortIcon field="reference"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.reference" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="prof">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Prof' | translate}}</span>
+                                <p-sortIcon field="prof"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="niveauEtude">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Niveau etude' | translate}}</span>
+                                <p-sortIcon field="niveauEtude"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="dateFreeTrial">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Date free trial' | translate}}</span>
+                                <p-sortIcon field="dateFreeTrial"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="link">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Link' | translate}}</span>
+                                <p-sortIcon field="link"></p-sortIcon>
+                                <p-columnFilter type="text" field="element.link" display="menu" class="ml-auto"></p-columnFilter>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="emailTeacherSent">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Email teacher sent' | translate}}</span>
+                                <p-sortIcon field="emailTeacherSent"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="emailTeacherSendingDate">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Email teacher sending date' | translate}}</span>
+                                <p-sortIcon field="emailTeacherSendingDate"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="whatsTeacherSent">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Whats teacher sent' | translate}}</span>
+                                <p-sortIcon field="whatsTeacherSent"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="whatsTeacherSendingDate">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Whats teacher sending date' | translate}}</span>
+                                <p-sortIcon field="whatsTeacherSendingDate"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                <!-- 
+                        <th pSortableColumn="freeTrialStudentWhatsTemplate">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Free trial student whats template' | translate}}</span>
+                                <p-sortIcon field="freeTrialStudentWhatsTemplate"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="freeTrialStudentEmailTemplate">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Free trial student email template' | translate}}</span>
+                                <p-sortIcon field="freeTrialStudentEmailTemplate"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="freeTrialTeacherEmailTemplate">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Free trial teacher email template' | translate}}</span>
+                                <p-sortIcon field="freeTrialTeacherEmailTemplate"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="freeTrialTeacherWhatsTemplate">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Free trial teacher whats template' | translate}}</span>
+                                <p-sortIcon field="freeTrialTeacherWhatsTemplate"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="dateFreeTrialPremierRappel">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Date free trial premier rappel' | translate}}</span>
+                                <p-sortIcon field="dateFreeTrialPremierRappel"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="dateFreeTrialPremierDeuxiemeRappel">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Date free trial premier deuxieme rappel' | translate}}</span>
+                                <p-sortIcon field="dateFreeTrialPremierDeuxiemeRappel"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="nombreStudentTotal">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Nombre student total' | translate}}</span>
+                                <p-sortIcon field="nombreStudentTotal"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="freeTrialConfiguration">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Free trial configuration' | translate}}</span>
+                                <p-sortIcon field="freeTrialConfiguration"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="nombreStudentAbonne">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Nombre student abonne' | translate}}</span>
+                                <p-sortIcon field="nombreStudentAbonne"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="nombreStudentPresent">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Nombre student present' | translate}}</span>
+                                <p-sortIcon field="nombreStudentPresent"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                                <!-- 
+                        <th pSortableColumn="statutFreeTrial">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Statut free trial' | translate}}</span>
+                                <p-sortIcon field="statutFreeTrial"></p-sortIcon>
+                            </div>
+                        </th>
+                                --> 
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                        <td>{{element.reference}}</td>
+                            
+                            
+                        <td>{{element.prof?.ref}}</td>
+                            
+                            
+                        <td>{{element.niveauEtude?.libelle}}</td>
+                            
+                            
+                        <td>{{element.dateFreeTrial | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td>{{element.link}}</td>
+                            
+                            
+                        <td><i *ngIf="element.emailTeacherSent" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!element.emailTeacherSent" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+                            
+                            
+                        <td>{{element.emailTeacherSendingDate | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                            
+                        <td><i *ngIf="element.whatsTeacherSent" class="pi pi-check checked-toogle"></i>
+                            <i *ngIf="!element.whatsTeacherSent" class="pi pi-times unchecked-toogle"></i>
+                        </td>
+                            
+                            
+                        <td>{{element.whatsTeacherSendingDate | date :'dd/MM/yyyy HH:mm' }}</td>
+                            
+                             <!-- 
+                        <td>{{element.freeTrialStudentWhatsTemplate?.id}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.freeTrialStudentEmailTemplate?.id}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.freeTrialTeacherEmailTemplate?.id}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.freeTrialTeacherWhatsTemplate?.id}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.dateFreeTrialPremierRappel | date :'dd/MM/yyyy HH:mm' }}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.dateFreeTrialPremierDeuxiemeRappel | date :'dd/MM/yyyy HH:mm' }}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.nombreStudentTotal}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.freeTrialConfiguration?.id}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.nombreStudentAbonne}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.nombreStudentPresent}}</td>
+                             --> 
+                             <!-- 
+                        <td>{{element.statutFreeTrial?.libelle}}</td>
+                             --> 
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning" (click)="duplicate(element)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'free trial' : 'free trials' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-free-trial-create-admin></app-free-trial-create-admin>
+        <app-free-trial-edit-admin></app-free-trial-edit-admin>
+        <app-free-trial-view-admin></app-free-trial-view-admin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

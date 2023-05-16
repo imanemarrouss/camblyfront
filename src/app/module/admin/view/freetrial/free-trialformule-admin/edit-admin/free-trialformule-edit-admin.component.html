@@ -1,0 +1,96 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'freeTrialformuleTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'freeTrialformuleTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="1">{{'freeTrialformuleCode' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'freeTrialformuleCode' | translate}}" id="1" [(ngModel)]="item.code"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validFreeTrialformuleCode}"  />
+                                            <small class='p-error' *ngIf='!validFreeTrialformuleCode'>Code est obligatoire.</small>
+                                        </div>
+
+                                    <div class="field col-11 md:col-3">
+                                            <label for="2">{{'freeTrialformuleInscription' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="inscriptions" [(ngModel)]="item.inscription" id="2"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="id" placeholder="{{'freeTrialformuleInscription' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="3">{{'freeTrialformuleDayspeerweek' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'freeTrialformuleDayspeerweek' | translate}}" id="3" [(ngModel)]="item.dayspeerweek"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="4">{{'freeTrialformuleTimeperday' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'freeTrialformuleTimeperday' | translate}}" id="4" [(ngModel)]="item.timeperday"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="5">{{'freeTrialformuleTeacherGenderoption' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'freeTrialformuleTeacherGenderoption' | translate}}" id="5" [(ngModel)]="item.teacherGenderoption"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="6">{{'freeTrialformuleTeacherAgeRange' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'freeTrialformuleTeacherAgeRange' | translate}}" id="6" [(ngModel)]="item.teacherAgeRange"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="7">{{'freeTrialformuleTeacherPersonnality' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'freeTrialformuleTeacherPersonnality' | translate}}" id="7" [(ngModel)]="item.teacherPersonnality"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field align-inputswitch col-12  md:col-4">
+                                            <div  class="label-inputswitch">
+                                                <label for="8">{{'freeTrialformuleStatus' | translate}}</label>
+                                            </div>
+                                            <div class="input-switch">
+                                                <p-inputSwitch   appendTo="body" id="8"  [(ngModel)]="item.status"
+                                                         >
+                                                </p-inputSwitch>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="9">{{'freeTrialformuleDateConfirmation' | translate}}</label>
+                                            <p-calendar appendTo="body" id="9"   [showTime]="true" [showSeconds]="false" placeholder="{{'freeTrialformuleDateConfirmation' | translate}}"  [(ngModel)]="item.dateConfirmation"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

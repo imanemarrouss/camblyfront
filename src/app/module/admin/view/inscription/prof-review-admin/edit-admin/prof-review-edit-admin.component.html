@@ -1,0 +1,78 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'profReviewTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'profReviewTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                    <div class="field col-11 md:col-5">
+                                            <label for="1">{{'profReviewEtudiant' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="etudiants" [(ngModel)]="item.etudiant" id="1"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="ref" placeholder="{{'profReviewEtudiant' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateEtudiant('Etudiant')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-5">
+                                            <label for="2">{{'profReviewProf' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="profs" [(ngModel)]="item.prof" id="2"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="ref" placeholder="{{'profReviewProf' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-5">
+                                            <label for="3">{{'profReviewCours' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="courss" [(ngModel)]="item.cours" id="3"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'profReviewCours' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="4">{{'profReviewReview' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="4"
+                                                           placeholder="{{'profReviewReview' | translate}}" [(ngModel)]="item.review"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="5">{{'profReviewComment' | translate}}</label>
+                                            <textarea appendTo="body" id="5" pInputTextarea rows="5" cols="30" placeholder="{{'profReviewComment' | translate}}"  [(ngModel)]="item.comment"
+                                                     ></textarea>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="6">{{'profReviewDateReview' | translate}}</label>
+                                            <p-calendar appendTo="body" id="6"   [showTime]="true" [showSeconds]="false" placeholder="{{'profReviewDateReview' | translate}}"  [(ngModel)]="item.dateReview"
+                                                    dateFormat="{{dateFormat}}"  >
+                                            </p-calendar>
+                                            
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-etudiant-create-admin></app-etudiant-create-admin>
+
+
+    </p-dialog>

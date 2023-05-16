@@ -1,0 +1,47 @@
+        <p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'etudiantClassRoomTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                        <p-tabView>
+                            <p-tabPanel header="{{'etudiantClassRoomTabPan' | translate}}">
+                                <div class="grid">
+
+                                            <div class="field col-11 md:col-5">
+                                                <label for="1">{{'etudiantClassRoomClassRoom' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="classRooms" [(ngModel)]="item.classRoom" id="1" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" libelle " placeholder="{{'etudiantClassRoomClassRoom' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                            <div class="field col-11 md:col-5">
+                                                <label for="2">{{'etudiantClassRoomEtudiant' | translate}}</label>
+                                                <p-dropdown  appendTo="body"  [options]="etudiants" [(ngModel)]="item.etudiant" id="2" [filter]="true" filterMatchMode="contains"
+                                                        [showClear]="true" optionLabel=" ref " placeholder="{{'etudiantClassRoomEtudiant' | translate}}"  >
+                                                </p-dropdown>
+                                                
+                                            </div>
+                                                <div class="col-1">
+                                                    <label></label>
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateEtudiant('Etudiant')" class="p-button-success one-colonne-btn-success-align"></button>
+                                                </div>
+                                </div>
+                            </p-tabPanel>
+
+                        </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-step">
+                        <div style="margin-left: auto;">
+                            <button pButton pRipple label="Valider"  icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                        </div>
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideCreateDialog()"></button>
+                        </div>
+
+                </div>
+            </ng-template>
+
+            <app-etudiant-create-admin></app-etudiant-create-admin>
+
+
+    </p-dialog>

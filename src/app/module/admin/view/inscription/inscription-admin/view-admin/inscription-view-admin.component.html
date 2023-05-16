@@ -1,0 +1,100 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'inscriptionTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="1">{{'Numero inscription' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="1" [disabled]="true" placeholder="{{'Numero inscription' | translate}}" [(ngModel)]="item.numeroInscription"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="2">{{'Etudiant' | translate}}</label>
+                        <p-dropdown [options]="etudiants" [(ngModel)]="item.etudiant" id="2" [disabled]="true" optionLabel="ref" placeholder="{{'Etudiant' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="3">{{'Etat inscription' | translate}}</label>
+                        <p-dropdown [options]="etatInscriptions" [(ngModel)]="item.etatInscription" id="3" [disabled]="true" optionLabel="libelle" placeholder="{{'Etat inscription' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="4">{{'Parcours' | translate}}</label>
+                        <p-dropdown [options]="parcourss" [(ngModel)]="item.parcours" id="4" [disabled]="true" optionLabel="libelle" placeholder="{{'Parcours' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="5">{{'Groupe etude' | translate}}</label>
+                        <p-dropdown [options]="groupeEtudes" [(ngModel)]="item.groupeEtude" id="5" [disabled]="true" optionLabel="libelle" placeholder="{{'Groupe etude' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="6">{{'Statut social' | translate}}</label>
+                        <p-dropdown [options]="statutSocials" [(ngModel)]="item.statutSocial" id="6" [disabled]="true" optionLabel="libelle" placeholder="{{'Statut social' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="7">{{'Interet etudiant' | translate}}</label>
+                        <p-dropdown [options]="interetEtudiants" [(ngModel)]="item.interetEtudiant" id="7" [disabled]="true" optionLabel="libelle" placeholder="{{'Interet etudiant' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="8">{{'Niveau etude' | translate}}</label>
+                        <p-dropdown [options]="niveauEtudes" [(ngModel)]="item.niveauEtude" id="8" [disabled]="true" optionLabel="libelle" placeholder="{{'Niveau etude' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="9">{{'Fonction' | translate}}</label>
+                        <p-dropdown [options]="fonctions" [(ngModel)]="item.fonction" id="9" [disabled]="true" optionLabel="libelle" placeholder="{{'Fonction' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="10">{{'Quiz' | translate}}</label>
+                        <p-dropdown [options]="quizs" [(ngModel)]="item.quiz" id="10" [disabled]="true" optionLabel="lib" placeholder="{{'Quiz' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="11">{{'Note quiz niveau' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="11" [disabled]="true" placeholder="{{'Note quiz niveau' | translate}}" [(ngModel)]="item.noteQuizNiveau"></p-inputNumber>
+                    </div>
+                    <div class="field align-inputswitch col-12  md:col-3">
+                        <div  class="label-inputswitch">
+                            <label for="12">{{'Quiz finished' | translate}}</label>
+                        </div>
+                        <div class="input-switch">
+                            <p-inputSwitch id="12"  [disabled]="true" [(ngModel)]="item.quizFinished"></p-inputSwitch>
+                        </div>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="13">{{'Date registration' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Date registration' | translate}}" autofocus  id="13" [(ngModel)]="item.dateRegistration">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="14">{{'Datedebutinscription' | translate}}</label>
+                        <p-calendar id="14" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Datedebutinscription' | translate}}"  [(ngModel)]="item.datedebutinscription" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="15">{{'Datefininscription' | translate}}</label>
+                        <p-calendar id="15" [disabled]="true"  [showTime]="true" [showSeconds]="false" placeholder="{{'Datefininscription' | translate}}"  [(ngModel)]="item.datefininscription" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="16">{{'Pack student' | translate}}</label>
+                        <p-dropdown [options]="packStudents" [(ngModel)]="item.packStudent" id="16" [disabled]="true" optionLabel="libelle" placeholder="{{'Pack student' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="17">{{'Skill' | translate}}</label>
+                        <p-dropdown [options]="skills" [(ngModel)]="item.skill" id="17" [disabled]="true" optionLabel="libelle" placeholder="{{'Skill' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="18">{{'Skype' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Skype' | translate}}" autofocus  id="18" [(ngModel)]="item.skype">
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

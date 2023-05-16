@@ -1,0 +1,183 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'questionTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'questionTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="1">{{'questionRef' | translate}}<span style="color: red;">*</span></label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'questionRef' | translate}}" id="1" [(ngModel)]="item.ref"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validQuestionRef}"  />
+                                            <small class='p-error' *ngIf='!validQuestionRef'>Ref est obligatoire.</small>
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="2">{{'questionLibelle' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'questionLibelle' | translate}}" id="2" [(ngModel)]="item.libelle"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="3">{{'questionUrlImg' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'questionUrlImg' | translate}}" id="3" [(ngModel)]="item.urlImg"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="4">{{'questionUrlVideo' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'questionUrlVideo' | translate}}" id="4" [(ngModel)]="item.urlVideo"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="5">{{'questionNumero' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="5"
+                                                           placeholder="{{'questionNumero' | translate}}" [(ngModel)]="item.numero"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="6">{{'questionPointReponseJuste' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="6"
+                                                           placeholder="{{'questionPointReponseJuste' | translate}}" [(ngModel)]="item.pointReponseJuste"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-3">
+                                            <label for="7">{{'questionPointReponsefausse' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="7"
+                                                           placeholder="{{'questionPointReponsefausse' | translate}}" [(ngModel)]="item.pointReponsefausse"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="8">{{'questionTypeDeQuestion' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="typeDeQuestions" [(ngModel)]="item.typeDeQuestion" id="8"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="lib" placeholder="{{'questionTypeDeQuestion' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateTypeDeQuestion('TypeDeQuestion')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="10">{{'questionQuiz' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="quizs" [(ngModel)]="item.quiz" id="10"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="lib" placeholder="{{'questionQuiz' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateQuiz('Quiz')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                    <div class="field col-11 md:col-2">
+                                            <label for="11">{{'questionHomeWork' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="homeWorks" [(ngModel)]="item.homeWork" id="11"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="libelle" placeholder="{{'questionHomeWork' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                            <p-tabPanel header="{{'Reponses' | translate}}">
+                                <p-tabView [(activeIndex)]="activeTab">
+                                    <p-tabPanel header="Création">
+                                        <div class="grid">
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="1">Ref<span style="color: red;">*</span></label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Ref"
+                                                                       id="1" [(ngModel)]="reponsesElement.ref"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validReponsesRef}"  >
+                                                                <small class='p-error' *ngIf='!validReponsesRef'>Ref est obligatoire.</small>
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="2">Lib<span style="color: red;">*</span></label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Lib"
+                                                                       id="2" [(ngModel)]="reponsesElement.lib"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validReponsesLib}"  >
+                                                                <small class='p-error' *ngIf='!validReponsesLib'>Lib est obligatoire.</small>
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Etat reponse</label>
+                                                                <p-dropdown appendTo="body" [options]="etatReponses" [(ngModel)]="reponsesElement.etatReponse"
+                                                                        id="3"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="libelle" placeholder="Etat reponse"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateEtatReponse('EtatReponse')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="4">Numero</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="numero" [(ngModel)]="reponsesElement.numero" placeholder="Numero"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                <div class="field col-12 md:col-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addReponses()"></button>
+                                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste {{item.reponses?.length > 0 ? '(' + item.reponses?.length + ')' : ''}}">
+                                            <div class="card">
+                                                <p-table [value]="item.reponses" [scrollable]="true" scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Ref</th>
+                                                                        <th>Lib</th>
+                                                                        <th>Etat reponse</th>
+                                                                        <th>Numero</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                        <td>{{p.ref}}</td>
+                                                                        <td>{{p.lib}}</td>
+                                                                    <td>{{p.etatReponse?.libelle}}</td>
+                                                                        <td>{{p.numero}}</td>
+                                                            <td>
+                                                                <button (click)="deleteReponse(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                <button (click)="editReponse(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-type-de-question-create-admin></app-type-de-question-create-admin>
+                    <app-quiz-create-admin></app-quiz-create-admin>
+
+                            <app-etat-reponse-create-admin></app-etat-reponse-create-admin>
+
+    </p-dialog>
